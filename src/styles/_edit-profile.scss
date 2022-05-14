@@ -1,0 +1,110 @@
+@import 'responsive' ;
+
+div.edit-profile{
+    div.header{
+        @include mobile-view(){
+            border-top: none !important;
+        }
+        h5{
+            font-size: 0.8rem !important;
+            color: rgb(65, 65, 65);             
+        }        
+    }
+    div.body{
+        img{
+            height: 180px;
+            width: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            @include mobile-view(){
+                height: 150px;
+                width: 150px;
+                display: block;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        }
+        form{
+            label{
+                font-size: 0.49rem;        
+                &:hover{
+                    color: rgb(0, 152, 93);
+                }                     
+            }
+            label.profile-image{
+                @include mobile-view(){                    
+                    width: 150px;
+                    display: block;
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    margin-top: 5px !important;
+                    font-size: 0.65rem;  
+                } 
+            }
+            .image-label{
+                height: 0;
+                width: 0;
+            }
+            div.inputs-wrapper{
+                width: 50%;
+                @include mobile-view(){
+                     width: 100%;
+                }
+                label{ 
+                    font-size: 0.45rem;
+                    display: block;
+                    margin-bottom: 5px;
+                    &:hover{
+                        color: rgb(0, 0, 0);
+                    }
+                    @include mobile-view(){
+                         font-size: 0.6rem;
+                    }
+                 } 
+                 input,#about{
+                     font-size: 0.44rem !important;
+                     @include mobile-view(){
+                       font-size: 0.55rem !important;
+                    }
+                 } 
+                 #about{
+                     height: 160px;                     
+                 }   
+                 span.dropdown-toggle{
+                     font-size: 0.49rem !important;
+                     &:hover{ cursor: pointer; }
+                     @include mobile-view(){
+                        font-size: 0.6rem !important;
+                    }
+                 }            
+                 p.p-location{
+                     font-size: 0.43rem !important;
+                     @include mobile-view(){
+                        font-size: 0.6rem !important;
+                    }
+                 }
+            }
+            div.update-data{
+                div{
+                    a,button{
+                        font-size: 0.45rem !important;
+                        border: none;
+                        border-radius: 30px;
+                        display: inline-block;
+                        width: 160px;
+                        @include mobile-view(){
+                             font-size: 0.6rem !important;
+                             width: 130px;
+                        }
+                    }      
+                    a{ 
+                        &:hover{ background: rgb(226, 226, 226); }
+                        &:hover,&:active,&:visited,&:focus{
+                            box-shadow: 0 0 0 transparent;
+                        }
+                    }     
+                }
+            }
+        }
+    }
+}

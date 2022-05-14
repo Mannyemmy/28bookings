@@ -1,0 +1,105 @@
+@import 'responsive' ;
+
+div.create-item{
+    &>h5{
+        font-size: 0.85rem !important;
+        @include mobile-view(){
+            font-size: 1rem !important;
+            border-top: none !important;
+        }
+    }
+    div.create-item-wrapper{        
+        form{
+            width: 70%;
+            @include mobile-view(){
+                 width: 98%;               
+            }
+            &>h5{
+                font-size: 0.65rem !important;
+                @include mobile-view(){
+                    font-size: 0.75rem !important;                  
+                }
+            }
+            p{
+                font-size: 0.43rem !important;                
+                @include mobile-view(){
+                    font-size: 0.58rem !important;                  
+                }
+            }     
+            div.input-wrapper{
+                label.product-image{
+                    height: 160px;
+                    width: 260px;
+                    @include mobile-view(){
+                        margin-left: auto;                
+                        margin-right: auto;
+                        margin-top: 0.5rem;
+                    }
+                    span{
+                        font-size: 4rem !important;
+                        color :rgb(187, 187, 187) ;
+                    }
+                }
+                label{
+                    font-size: 0.48rem;
+                    @include mobile-view(){
+                        font-size: 0.6rem !important;                  
+                    }
+                    span{
+                        font-size: 0.5rem !important;     
+                        @include mobile-view(){
+                            font-size: 0.57rem !important;                  
+                        }                  
+                    }
+                }                
+                #product-image{
+                    width: 0 !important;
+                    height: 0 !important;
+                    visibility: hidden;
+                }
+                input,select,textarea{
+                    font-size: 0.44rem !important;
+                    @include mobile-view(){
+                        font-size: 0.58rem !important;  
+                        padding-top: 15px !important;   
+                        padding-bottom: 15px !important;             
+                    }
+                }
+                textarea{
+                    height: 200px;
+                    @include mobile-view(){
+                         height: 150px;        
+                    }
+                }
+            }       
+        }
+        div.rental-price-wrapper,div.item-value-wrapper,div.minimum-rentals-wrapper{
+            @include mobile-view(){
+                input{
+                    width: 50% !important;
+                }
+            }
+        }
+        div.add-item-wrapper{
+            div{
+                a,button{
+                    font-size: 0.42rem !important;
+                    border: none;
+                    border-radius: 30px;
+                    display: inline-block;
+                    width: 180px;
+                    @include mobile-view(){
+                         font-size: 0.6rem !important;
+                         width: 160px;
+                    }
+                }      
+                a{ 
+                    &:hover{ background: rgb(226, 226, 226); }
+                    &:hover,&:active,&:visited,&:focus{
+                        box-shadow: 0 0 0 transparent;
+                    }
+                }     
+            }
+        }
+    }
+}

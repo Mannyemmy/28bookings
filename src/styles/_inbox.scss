@@ -1,0 +1,29 @@
+@import 'responsive' ;
+
+div.inbox{
+   div.wrapper{
+       width: 40%;
+       @include mobile-view(500px){
+           width: 94%;
+       }
+       @include tablet-view(700px,900px){  width: 60%; }
+       img{
+           height: 240px;
+           width: 260px;           
+       }
+       h5{
+           font-size: 1rem !important;
+           font-weight: 600;
+           letter-spacing: 0.9px;
+       }
+       p{
+        @include mobile-view(500px){ font-size: 0.65rem !important; }
+       }
+       a.btn{
+           border-radius: 40px;
+           background: rgb(0, 152, 93);
+           font-size: 0.48rem !important;
+           @include mobile-view(500px){ font-size: 0.7rem !important; }
+       }
+   }
+}

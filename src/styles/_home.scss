@@ -1,0 +1,355 @@
+// this stylesheet is just for homepage component excluding navbar and footer component.
+
+//media query break points
+@import 'responsive' ;
+ 
+div.home-page{
+   header.page-header{
+     &>div{
+         @include mobile-view(){
+            flex-direction: column;
+         }  
+      div.header-text-wrapper{
+           h5{
+              font-size: 2rem !important;
+              color: rgb(9, 0, 94);
+              font-weight: 900;
+              @include mobile-view(){               
+               font-size: 1.7rem !important;
+               }  
+              strong{
+                 color: rgb(0, 194, 32);
+              }
+           }
+           p{
+              font-size: 0.6rem !important;
+              color: rgb(119, 118, 118);
+              @include mobile-view(){               
+               font-size: 0.8rem !important;
+               }  
+           }
+           form{
+              div.input-group{                      
+                 border-radius: 20px;        
+                 box-shadow: 2px 2px 10px rgba(0,0,0,0.2) , -1px -1px 4px rgba(0,0,0,0.1);
+                 width: 80%;
+                 @include mobile-view(){
+                   margin-left: auto;
+                   margin-right: auto;
+                   width: 96%;
+                }  
+                 input{
+                    border: none;
+                    @include mobile-view(){               
+                     font-size: 0.6rem !important;
+                     } 
+                    &:hover,&:focus{
+                       border: none;
+                    }
+                 }
+                 .input-group-text{
+                    background: rgb(255,255,255);   
+                    border: none; 
+                    font-size: 0.48rem !important; 
+                    span{                        
+                       color: rgb(255,255,255);
+                       padding: 6px 20px;
+                       background: rgb(0, 194, 32);
+                       font-size: inherit !important; 
+                       border-radius: 20px;
+                    }               
+                 }
+                 .sp-1{
+                     border-bottom-left-radius: 20px;
+                     border-top-left-radius: 20px;
+                 }
+                 .sp-2{
+                  border-bottom-right-radius: 20px;
+                  border-top-right-radius: 20px;
+                 }
+              }
+           }
+           div.mt-2{
+              span,a{
+                 font-size: 0.47rem !important;
+                 @include mobile-view(){
+                    font-size: 0.6rem !important;
+                 }  
+              }
+              a{ 
+                 border-radius: 20px;
+                 &:hover{ background: rgb(219, 219, 219); } 
+               }
+           }
+      }
+      div.image-wrapper{
+         z-index: -1;
+          @include tablet-view(900px,5000px){
+            margin-left: -200px;
+          }
+         img{
+            height: 500px;
+            width: 750px;
+            @include mobile-view(){
+               height: 360px;
+               width: 100%;
+               margin-top: -100px;
+            }  
+         }
+      }
+   }
+  }   
+  div.save-more{
+     &>div{
+        @include mobile-view(){
+           margin-top: 1rem;
+        }
+         img{
+            display: block;
+            height: 60px;
+            width: 60px;
+            background-repeat: no-repeat;            
+            margin-left: auto;
+            margin-right: auto;
+         }
+        
+        h5{
+           margin-top: 15px;
+           text-align: center;
+           @include tablet-view(900px,2000px){ font-size: 0.6rem !important; }
+        }
+        p{
+           text-align: center;
+           @include tablet-view(900px,2000px){ font-size: 0.48rem !important; }
+           opacity: 0.8;
+        }
+     }
+  }
+  
+  div.categories{
+     h5{
+        color: rgb(0, 194, 32);
+        font-weight: 600;
+     }
+     div.row{
+        div.col-6{
+           @include tablet-view(600px,3000px){
+              width: 20% !important;
+           }
+           a{                            
+               img{
+                  height: 150px;
+                  object-fit: cover;
+                  border-top-left-radius: 20px;
+                  border-top-right-radius: 20px;
+               }
+               p{
+                  color: rgb(104, 104, 104);
+                  border-top: none !important;
+                  border-bottom-left-radius: 20px;
+                  border-bottom-right-radius: 20px;
+                  text-align: center;
+                  font-size: 0.45rem !important;
+                  @include mobile-view(600px){
+                     font-size: 0.6rem !important;
+                 }
+               }
+           }
+        }
+     }
+  }
+  div.access-everything{
+      @include mobile-view(){      
+         margin-top: 9rem !important;
+      }
+    &>div{
+       @include mobile-view(){
+          flex-direction: column; 
+          margin-top: -2px !important;         
+       }
+      background: rgb(44, 203, 187);
+         img{
+             height: 600px;
+             width: 650px;
+             margin-top: -9rem;
+             @include mobile-view(){
+               height: 400px;
+               width: 360px;
+               margin-top: -13rem;
+               margin-left: -30px;
+            }
+         }
+         div.align-self-center{
+            color: rgb(255,255,255);        
+            @include mobile-view(){
+              align-self: flex-start !important;
+              margin-top: 0 ;
+           } 
+             h5{
+                font-weight: 600;
+                font-size: 0.9rem !important;
+             }
+             p{
+                font-size: 0.5rem !important;
+                @include mobile-view(){
+                   font-size: 0.62rem !important;     
+                 } 
+             }
+             a{
+                color: rgb(0, 194, 32);
+                font-size: 0.5rem !important;
+                @include mobile-view(){
+                   font-size: 0.62rem !important;   
+                   margin-bottom: 60px;  
+                 } 
+             }
+         }
+    }
+  }
+  div.share-your-stuff{
+     @include tablet-view(900px,3000px){
+      margin-top: -3rem;
+     }
+     @include mobile-view(600px){
+        flex-direction: column;
+     }
+     div.wrapper{
+        h5{
+         font-weight: 600;
+         font-size: 0.9rem !important;
+         color: rgb(0, 194, 32);
+        }
+        p{
+           font-size: 0.5rem !important;  
+           @include mobile-view(){
+              font-size: 0.6rem !important;
+            }  
+        }
+        a{
+            background: rgb(0, 194, 32);
+            font-size: 0.5rem !important;
+            border: none;
+            border-radius: 30px;
+            &:hover,&:active,&:focus{
+            box-shadow: 0 0 0 transparent;
+            }
+            @include mobile-view(){
+            font-size: 0.6rem !important;
+            }                 
+         }
+     }
+     img{
+        height: 600px;
+        width: 800px;
+        @include mobile-view(){
+            height: 400px;
+             width: 100%;
+         }  
+     }
+  }
+  div.get-access{
+   @include mobile-view(600px){
+      flex-direction: column;
+   }
+      img{
+         height: 600px;
+         width: 700px;
+         @include mobile-view(){
+            height: 390px;
+             width: 100%;
+         }  
+      }
+      div.wrapper{
+         h5{
+          font-weight: 600;
+          font-size: 0.9rem !important;
+          color: rgb(0, 194, 32);
+         }
+         p{
+            font-size: 0.5rem !important; 
+            @include mobile-view(){
+                 font-size: 0.6rem !important;
+               }            
+         }
+         a{
+             background: rgb(0, 194, 32);
+             font-size: 0.5rem !important;
+             border: none;
+             border-radius: 30px;
+             &:hover,&:active,&:focus{
+             box-shadow: 0 0 0 transparent;
+             }
+             @include mobile-view(){
+             font-size: 0.6rem !important;
+             }                 
+          }
+      }
+  }
+  div.rental-review{     
+     div.rental-container{
+         background:  rgb(37, 172, 159);
+         div.row{
+            div.col-12{    
+               @include mobile-view(){
+                    padding: 5px !important;
+                  }             
+               div.bg-white{
+                  border-radius: 10px;
+                  p{
+                     font-size: 0.5rem !important;
+                     @include mobile-view(){
+                        font-size: 0.7rem !important;
+                        }  
+                     strong{
+                        font-size: 0.6rem;
+                        color: rgb(37, 172, 159);
+                        @include mobile-view(){
+                           font-size: 0.8rem !important;
+                           }  
+                     }
+                  }
+                  div.d-flex{
+                     img{
+                        height: 50px;
+                        width: 50;
+                        border-radius: 50%;
+                        object-fit: cover;
+                     }
+                     div.ps-1{
+                        span{
+                           font-size: 0.5rem !important;
+                           @include mobile-view(){
+                              font-size: 0.6rem !important;
+                              }  
+                        }
+                         div.stars{
+                            margin-top: -0.5rem;
+                           span.fas{
+                              display: inline-block;
+                               color:  rgb(207, 211, 3);
+                               font-size: 0.45rem !important;
+                               @include mobile-view(){
+                                 font-size: 0.6rem !important;
+                                 }  
+                           }
+                         }
+                     }
+                  }
+               }
+            }
+         }
+     }
+     a.btn-light{
+      color: rgb(0, 194, 32);
+      font-size: 0.5rem !important;
+      border: none;
+      border-radius: 30px;
+      &:hover,&:active,&:focus{
+      box-shadow: 0 0 0 transparent;
+      }
+      @include mobile-view(){
+      font-size: 0.6rem !important;
+      }      
+     }
+  }
+}

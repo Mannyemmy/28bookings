@@ -1,0 +1,127 @@
+@import 'responsive' ;
+
+@mixin  set-font-size($mobile,$desktop) {
+     @include mobile-view(){
+         font-size: $mobile !important;
+     }
+     @include tablet-view(900px,3000px){
+         font-size: $desktop !important;
+     }
+}
+div.search-page{
+    div.mt-2{
+        button{
+            @include set-font-size(0.61rem,0.42rem );
+            background: rgb(238, 236, 236);
+            color: rgb(2, 2, 2);
+            border: none;
+            border-radius: 30px;
+        }
+    }
+    div.location-modal{
+        .modal-dialog{
+            @include tablet-view(600px,5000px){  width: 50% !important }
+        }
+        div.modal-header{
+            h4{  @include set-font-size(0.8rem,0.7rem );  }
+        }
+        div.modal-body{
+            width: 96%;
+            div.input-group{
+                input{
+                    @include set-font-size(0.63rem,00.43rem ) ;
+                    border-right: none !important;
+                    border-top-left-radius: 20px ;
+                    border-bottom-left-radius: 20px ;
+                    &:focus{  border-color: rgb(206, 203, 203) !important }
+                }
+                span.input-group-text{
+                   @include set-font-size(0.7rem,00.48rem );
+                   border-left: none !important;
+                   background: transparent;
+                   border-top-right-radius: 20px ;
+                   border-bottom-right-radius: 20px ;
+                   &:hover{ cursor: pointer; }
+                }
+            }
+            div.d-flex{
+                img{
+                    height: 30px;
+                    width: 30px;
+                }
+                div{
+                    h6{  @include set-font-size(0.67rem,00.5rem );  }
+                    p{
+                        @include set-font-size(0.52rem,00.41rem );
+                        opacity: 0.8;
+                    }
+                }
+            }
+                h5{ 
+                     @include set-font-size(0.8rem,00.56rem );                     
+                    }
+                ul{
+                    li{
+                        list-style: none;
+                        @include set-font-size(0.62rem,00.45rem ); 
+                        padding-left: 0.3rem;
+                        &:hover{ cursor: pointer; }
+                    }
+                }
+                         
+        }
+    }
+    div.category-modal{
+      
+        div.modal-header{
+            h4{  @include set-font-size(0.8rem,0.7rem );  }
+        }
+        div.modal-body{
+            div.row{
+                div.flex-child{
+                    transition: .2s;
+                    &:hover{ cursor: pointer; transform: scale(0.9);}
+                    @include tablet-view(900px,3000px){   width: 20%; }
+                    @include mobile-view(){  width: 31%; }
+                    div.svg-image{
+                        height: 65px;
+                        width: 60px;
+                        background-repeat: no-repeat;
+                        background-size: 100%;
+                    }
+                    p{
+                        @include set-font-size(0.6rem,00.43rem ); 
+                    }
+                }
+            }
+        }
+    }
+    div.search-result{
+        div.col-12{
+            &>div{
+               width: 94%;                
+               img{
+                  height: 220px;
+                  border-radius: 10px;
+               }
+               p{
+                  span{
+                     @include set-font-size(0.61rem,0.5rem ) ;
+                     color: rgba(0,0,0,0.8);
+                     i{ 
+                         color: rgb(233, 210, 7);
+                         @include set-font-size(0.6rem,0.48rem ) ;
+                       }
+                  }
+               }
+               h6{
+                 @include set-font-size(0.64rem,0.48rem ) ;
+               }
+               p.price{
+                 @include set-font-size(0.61rem,0.47rem ) ;
+                 color: rgb(0, 194, 32);                 
+               }
+            }
+         }
+    }
+}

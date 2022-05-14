@@ -1,0 +1,18 @@
+.custom__menu{
+    background-color: transparent;
+    border: none;
+    font-family: MuseoSans, Helvetica;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 16px;
+    appearance: none;
+    width: 100%;
+}
+
+.custom__control{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+    appearance: none;
+    width: 100%;
+}

@@ -1,0 +1,116 @@
+ //reset browser default style
+@import 'reset' ;
+
+// media queries for different devices.
+@import 'responsive' ;
+
+//google font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+html{     
+    scroll-behavior: smooth;
+    font-size: 32px !important;     
+    @include mobile-view(){
+        font-size: 20px !important;
+         /* hide side scroll bar icon from the page and keep functionality */
+         /* for chrome , internet explorer edge and firefox */
+
+            -ms-overflow-style: none;
+            margin: 0;
+            padding: 0;
+
+            /* hide side scroll bar icon from the page and keep functionality */
+            /* for chrome , opera and safari */
+
+            ::-webkit-scrollbar{
+                display: none;
+                width: 0;
+            }
+   }
+    @include tablet-view(){
+        font-size: 25px !important;
+    }  
+    body{
+        font-family: Montserrat,sans-serif;    
+        overflow-x:hidden  ;
+        overflow-y :scroll     
+    }
+    //default style for html elements    
+    a{
+        color: rgb(253, 253, 253);
+        text-decoration: none;
+        font-size: 0.6rem !important;
+        &:hover{
+           color: rgb(218, 214, 214)           
+        }
+        &:focus{  box-shadow: 0 0 0 transparent; }
+    }
+    button{
+        font-size: 0.48rem !important;
+        &:focus{
+            box-shadow: 0 0 0 transparent !important;
+        }
+        @include mobile-view(){
+            font-size: 0.9rem !important;
+        }
+    }
+    p{
+        font-size: 0.5rem !important;
+        @include mobile-view(){
+            font-size: 0.7rem !important;
+        }
+    }
+    h1,h5,h6,h4{
+        font-size: 0.7rem !important;
+        @include mobile-view(){
+            font-size: 0.9rem !important;
+        }
+    }
+    span,i{
+        font-size: 0.58rem !important;
+        @include mobile-view(){
+            font-size: 0.9rem !important;
+        }
+    }
+    input,textarea,select{
+        font-size: 0.5rem !important;
+        &:focus{
+            box-shadow: 0 0 0 transparent !important;
+            border-color: rgb(0, 152, 93) !important; 
+        }
+    }
+} 
+
+#root > div > div > form > div.input-wrapper > div:nth-child(2) > div > button.uploadcare--widget__button.uploadcare--widget__button_type_open{
+    display: none !important;
+}
+
+//navbar component style.
+@import 'navbar' ;
+//homepage style
+@import 'home';
+//how it worked page style
+@import 'how-it-worked' ;
+// list an item page style
+@import 'list-an-item' ;
+// rentals page style
+@import 'rentals' ;
+// favorite page style
+@import 'favorite' ;
+// inbox page style
+@import 'inbox' ;
+// profile page style
+@import 'profile' ;
+// edit-profile page style
+@import 'edit-profile' ;
+//business page style
+@import 'business' ;
+// create-item page style
+@import 'create-item' ;
+@import 'rental' ;
+@import 'product' ;
+@import 'search-product' ;
+//footer component style
+@import 'footer'
+
+ 

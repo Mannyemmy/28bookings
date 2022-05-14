@@ -1,0 +1,214 @@
+// navbar wrapper component styles
+@import 'responsive' ;
+
+@mixin  set-font-size($mobile,$desktop) {
+    @include mobile-view(){
+        font-size: $mobile !important;
+    }
+    @include tablet-view(900px,3000px){
+        font-size: $desktop !important;
+    }
+}
+
+
+div._navbar{
+    .add-shadow{
+        box-shadow: 0 0 15px rgba(0,0,0,0.35);
+        @include mobile-view(){  box-shadow: 0 0  12px  rgba(0,0,0,0.3); }
+        div.search-and-logo-wrapper{             
+             div.input-group{
+                 opacity: 0.7;
+                 @include mobile-view(){ width: 50% }
+                 input{
+                     @include set-font-size(0.63rem,00.43rem ) ;
+                     border-right: none !important;
+                     border-top-left-radius: 20px ;
+                     border-bottom-left-radius: 20px ;
+                     &:focus{  border-color: rgb(206, 203, 203) !important }
+                 }
+                 span.input-group-text{
+                    @include set-font-size(0.7rem,00.48rem );
+                    border-left: none !important;
+                    background: transparent;
+                    border-top-right-radius: 20px ;
+                    border-bottom-right-radius: 20px ;
+                    &:hover{ cursor: pointer; }
+                 }
+             }
+        }
+    }
+    @include mobile-view(600px){
+        .m-hide{
+            display: none;
+        }
+      }
+  &>div{
+      img{
+          height: 60px;
+          width: 90px;      
+          @include mobile-view(600px){
+            height: 53px;
+            width: 80px
+        }     
+      }
+      div{
+          a,button{
+                font-size: 0.47rem !important;
+                &:focus,&:active{
+                    box-shadow: 0 0 0 transparent !important;                    
+                }
+          }
+          span.hambuger{
+            background-image: url(../assets/hamburger.svg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: inline-block;
+            height: 23px;
+            width: 23px;
+            opacity: 0.8;
+          }
+          a{ color: rgb(0, 172, 29); }
+          button{ 
+                border-radius: 20px;
+                &:hover{
+                    background: rgb(231, 231, 231); 
+                }
+            }
+      }
+  } 
+  ul.dropdown-menu{
+      li{
+          a,span{
+            font-size: 0.43rem !important;
+            color: rgb(0, 0, 0);
+            &:hover{
+                color: rgb(255, 255, 255);
+                background: rgb(0, 152, 93);
+            }
+            @include mobile-view(600px){
+                font-size: 0.6rem !important;
+            }
+          }
+      }
+  }   
+  .offcanvas-end{
+      overflow-y: scroll;
+    @include tablet-view(900px,1400px){
+        width: 40%;    
+    }
+    @include mobile-view(600px){
+        width: 100%;
+    }
+    div.signup-container,div.sign-in-container{      
+        span.text-reset{
+            &:hover{ color: rgb(228, 0, 11) !important; }
+            @include mobile-view(){ 
+                font-size: 0.8rem !important; 
+            }
+        }           
+        h1{
+            font-weight: 600;
+            letter-spacing: 1.3px; 
+            font-size: 0.9rem !important;
+            b{ color: rgb(0, 152, 93); }             
+        }
+        span.d-block{
+            width: 100px;
+            border: 2px solid rgb(0, 152, 93);
+            margin-top: -10px;
+            @include mobile-view(){  margin-top: 5px;   }
+        }
+        form{
+            label{
+                font-size: 0.45rem;
+                sup{
+                    font-size: 0.45rem;                
+                }
+                @include mobile-view(){ 
+                    font-size: 0.6rem; 
+                    sup{
+                        font-size: 0.5rem;                    
+                    }                
+                }            
+            }
+            input{
+                font-size: 0.45rem !important;
+                @include mobile-view(){   font-size: 0.59rem !important ;   }
+            }
+            p.status{ 
+                    font-size: 0.45rem !important;
+                    @include mobile-view(){ font-size: 0.6rem !important;  }
+                }
+            p.sign-in{
+                font-size: 0.45rem !important;
+                @include mobile-view(){ font-size: 0.58rem !important;  }
+                span{
+                    font-size: 0.49rem !important;
+                    &:hover{ cursor : pointer }
+                @include mobile-view(){ font-size: 0.59rem !important;  }
+                }
+            }
+            button.d-block{
+                width: 80%;          
+                justify-content: center;
+                align-items: center;                
+                margin-bottom: 17px !important;
+                background:rgb(0, 152, 93) ;     
+                @include mobile-view(){   font-size: 0.64rem !important ;   }
+                    &:hover,&:active,&:focus{
+                        background:rgb(0, 152, 93) ;     
+                        border: none;
+                    }       
+                                            
+                i.spinner{
+                    font-size: 10px !important;
+                    height: 0.7rem;
+                    width: 0.7rem;
+                    @include mobile-view(){  
+                        height: 0.9rem;
+                        width: 0.9rem;
+                    }
+                }
+            }
+        }    
+    }
+ }
+ .logged-user-dropdown{
+    button.dropdown-togle{       
+        &:hover{ background: transparent !important; }         
+        img{
+            height: 35px;
+            width: 35px;
+            object-fit: cover;
+            border-radius: 50%;
+         }
+         span{
+            font-size : 0.45rem !important;
+            i{
+                font-size: 0.4rem !important;
+                margin-left: 4px;
+            }
+         }
+       }
+        ul{                  
+            li{                        
+                a{
+                    transition: background 0.2s;
+                    font-size: 0.43rem !important;                          
+                    &:hover{
+                        background: rgb(0, 152, 93) !important;
+                        color: rgb(255, 255, 255);
+                    }
+                    @include mobile-view(){  font-size: 0.6rem !important; }
+                }
+            }
+            button.logout-btn{
+                font-size: 0.5rem !important;   
+                @include mobile-view(){  font-size: 0.6rem !important; }                      
+                span.bi{
+                    font-size: inherit !important;
+                }
+            }
+        }    
+    }   
+}

@@ -1,0 +1,314 @@
+
+@import 'responsive' ;
+
+@mixin  set-font-size($mobile,$desktop) {
+     @include mobile-view(){
+         font-size: $mobile !important;
+     }
+     @include tablet-view(900px,3000px){
+         font-size: $desktop !important;
+     }
+}
+
+div._business{
+    div.header-container{
+       background: rgb(2, 175, 109);       
+       border-bottom-left-radius: 20px;
+       border-bottom-right-radius: 20px;
+       height: 790px;    
+       @include mobile-view(600px){
+        height: 720px;    
+        border-radius: 0;              
+      }         
+
+       div.flex-wrapper{
+        @include mobile-view(600px){
+            flex-direction: column;            
+        }
+          div.text-wrapper{
+               width: 50%;
+               @include mobile-view(600px){
+                width: 100%;
+                }
+               h5{
+                   font-weight: 600;
+                   @include set-font-size(1rem,1.6rem );
+               }
+               p{
+                  @include set-font-size(0.7rem,0.6rem );
+                  opacity: 0.9;
+               }
+          }
+          div.form-wrapper{
+              width:  38%;     
+              box-shadow: 0 3px 8px rgba(0,0,0,0.2); 
+              border-radius: 20px;        
+              height: 720px;    
+              @include mobile-view(600px){
+                width: 100%;
+                height: 520px;
+                }      
+              form{
+                border-radius : 30px ;
+                width: 84%;
+                h5{ 
+                    font-weight: 600;
+                    opacity: 0.9;
+                    @include set-font-size(0.9rem, 0.8rem)
+                }
+                p{
+                    @include set-font-size(0.6rem, 0.46rem)
+                }
+                input,textarea{
+                    @include set-font-size(0.6rem, 0.41rem);
+                    text-transform: capitalize;
+                }
+                button{
+                    width: 300px;
+                    background: rgb(2, 175, 109); 
+                    border: none;            
+                    border-radius: 20px;   
+                    @include set-font-size(0.6rem, 0.5rem); 
+                    @include mobile-view() {
+                        width: 250px;
+                        margin-top: 1rem !important;
+                    }
+                }
+              }
+          }
+       }
+    }     
+    div.trusted-companies{
+        h5{
+            @include set-font-size(0.7rem,0.6rem ) ;
+            opacity: 0.6;
+        }
+        div.d-flex{
+            img{
+                height: 50px;
+                width: 150px;
+                transition: .1s;
+                &:hover{
+                    transform: scale(1.1);
+                }
+                @include mobile-view() {
+                    width: 130px;
+                    height: 40px;
+                    margin-top: 0.5rem
+                }
+            }
+        }
+    }
+    div.helping-business{
+        h5{
+            @include set-font-size(1rem,00.9rem ) ;
+            font-weight: 600;
+            color: rgb(0, 194, 32);
+        }
+        div{
+            white-space: nowrap;
+            @include mobile-view(700px){  overflow-x: scroll; }
+            img{
+                height: 330px;
+                width: 250px;
+                @include mobile-view() {                  
+                   margin-top: 0.8rem;
+                   height: 300px;
+                }
+            }
+        }
+    }
+    div.renting-benefit{
+        background:rgb(237, 248, 247);
+        &>div{
+            &>div{
+                width: 45%;
+                @include mobile-view(600px){
+                    width: 100% ;
+                }
+            }
+            div.child-1{
+                h5{
+                    @include set-font-size(1rem, 00.8rem) ;
+                    font-weight: 600;
+                    opacity: 0.9;
+                    strong{
+                        color: rgb(0, 194, 32);
+                    }
+                }
+                p{
+                    @include set-font-size(0.62rem,00.53rem )
+                }
+                img{
+                    width: 30%;
+                    height: 90px;
+                    @include mobile-view(600px){
+                        height : 75px
+                    }
+                }
+            }
+            div.child-2{
+                @include mobile-view(600px){
+                    margin-top: 1.1rem
+                }
+                h5.d-flex{
+                    @include set-font-size(0.6rem,0.45rem );
+                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                    border-radius: 8px;
+                    &:hover{ cursor: pointer; }
+                    span{
+                        @include set-font-size(0.6rem,0.45rem ) ;
+                        opacity: 0.8;
+                    }
+                }
+                div{
+                    @include set-font-size(0.5rem,0.4rem ) ;
+                    margin-bottom: 0.5rem;
+                    background: rgb(255, 255, 255);                    
+                }
+            }
+        }
+    }
+    div.request-a-callback{
+        background-image: url(../assets/green.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        @include mobile-view(){
+            background-size: cover
+        }
+        &>div{
+            background: rgba(5, 184, 85, 0.7);
+            h5{
+                @include set-font-size(0.9rem, 00.8rem) ;
+                font-weight: 600;
+            }
+            p{
+                @include set-font-size(0.63rem,00.53rem );                
+            }
+            button{
+                width: 250px;
+                color: rgb(0, 194, 32);
+                border-radius: 30px;
+                @include mobile-view(){
+                    font-size: 0.62rem !important;
+                }
+            }
+        }
+    }
+    div.our-experience{         
+        &>h5{
+            @include set-font-size(0.9rem, 0.9rem) ;
+            opacity: 0.9;
+            font-weight: 600;
+            strong{ color: rgb(0, 194, 32); }
+        }
+        div.row{
+            div.col-12{
+                 img{
+                     height: 80px;
+                     width: 80px;
+                 }
+                 h5{
+                     text-align: center;
+                     @include set-font-size(0.7rem, 0.6rem) ;
+                 }
+                 p{
+                     text-align: center;
+                     @include set-font-size(0.6rem, 0.42rem) ;
+                     opacity: 0.8;
+                 }
+            }
+        }
+    }
+    div.our-stories{
+        background: rgb(233, 243, 253);
+        div.d-flex{     
+            @include mobile-view(){
+               flex-wrap: wrap;
+            }
+            div.f-child{
+                width: 40% ;
+                @include mobile-view(){
+                    width: 100%;
+                }
+            }
+            div.s-child{
+                width: 55% ;
+                @include mobile-view(){
+                    width: 100%;
+                }
+            }
+            div.f-child{
+                h5{
+                    @include set-font-size(0.9rem, 1.1rem) ;
+                    opacity: 0.9;
+                    font-weight: 600;
+                    strong{ color: rgb(0, 194, 32); }
+                }
+                p{
+                    @include set-font-size(0.65rem, 0.6rem) ;
+                }
+                button{                    
+                    border-color: rgb(0, 194, 32);
+                    font-size: 0.7rem !important;
+                    color: rgb(0, 194, 32);
+                    transition: transform .3s;
+                    &:active{ transform: scale(0.8); }
+                    &:focus,&:hover{
+                        background: rgb(0, 194, 32);
+                        color: rgb(255, 255, 255);
+                    }
+                }
+            }
+            div.s-child{
+                div.stories-wrapper{     
+                    scroll-behavior: smooth;               
+                    overflow: hidden;
+                    @include mobile-view(500px){
+                        overflow-x:scroll;
+                    }
+                    &>div{
+                         box-shadow:  0 0 3px rgba(148, 147, 147, 0.1),
+                                      -1px -1px 3px rgba(160, 160, 160, 0.1)
+                         ;
+                         margin-left: 7px;
+                         border-radius: 10px;
+                         width: 350px;
+                         height: 440px;                        
+                          flex: 0 0 auto; 
+                          @include mobile-view(){
+                            height: 350px;
+                        }                                 
+                         img{
+                             height: 100px;
+                             width: 100px;
+                             display: block
+                         }
+                         p{
+                             @include set-font-size(0.5rem,00.38rem ) ;                                             
+                             opacity: 0.9;
+                             strong{
+                                @include set-font-size(0.6rem,00.55rem ) ;  
+                                color: rgb(0, 194, 32);
+                                font-weight: 600;
+                             }
+                         }
+                         div.divider{
+                             width: 70%;
+                             border: 2px solid rgb(0, 194, 32) ;
+                         }
+                         h5{
+                            @include set-font-size(0.73rem,00.55rem ) ;
+                            opacity: 0.8;
+                         }
+                         h4{
+                            @include set-font-size(0.65rem,00.5rem ) ;
+                            color: rgb(0, 194, 32);
+                         }
+                    }
+                }
+            }
+        }
+    }
+}
+ 

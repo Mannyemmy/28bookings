@@ -1,0 +1,156 @@
+@import 'responsive' ;
+
+div.how-it-worked{
+    div.how-to{
+        &>div{
+            h5{
+                font-size: 1.5rem !important;
+                color:  rgba(0, 152, 93,0.8);
+                font-weight: 600;
+                @include mobile-view(){
+                    font-size: 1rem !important;
+                    margin-top: 1.7rem;
+                }
+            }
+            p{
+                font-size: 0.8rem !important;
+            }
+        }
+        img{
+            width: 55%;
+            @include mobile-view(600px){
+                display: none;
+            }
+        }
+    }   
+}
+.b-rental-wrapper{
+   margin-top: -2.7rem;      
+    @include mobile-view(600px){
+         margin-top: -1.3rem;
+    }
+   
+    div.text-white{
+        background: rgb(2, 175, 109);
+        margin-top: -50px;
+        z-index: -1;
+        @include mobile-view(600px){
+            margin-top: -10px;
+       }
+        h5{
+            font-size: 0.9rem !important;
+            font-weight: 600;
+            letter-spacing: 0.9px;
+        }
+        ul{
+            li{
+                h6{
+                    font-size: 0.6rem !important; 
+                    @include mobile-view(600px){
+                        font-size: 0.74rem !important;
+                   }                  
+                }
+                span{                                       
+                    font-size: 0.9rem !important;      
+                    margin-top: -27px;             
+
+                }
+                p{
+                    color: rgba(255, 255, 255, 0.9);
+                    font-size: 0.48rem !important; 
+                    @include mobile-view(600px){
+                        font-size: 0.6rem !important;
+                   }
+                }
+            }
+        }
+    }   
+    div.mt-4{
+        h5{
+            font-size: 0.9rem !important;
+            font-weight: 600;
+            letter-spacing: 0.9px;
+            color: rgb(2, 175, 109);
+        }
+        ul{
+            li{
+                h6{
+                    font-size: 0.6rem !important;   
+                    @include mobile-view(600px){
+                         font-size: 0.8rem !important;
+                   }                                   
+                }
+                span{                                       
+                    font-size: 0.9rem !important;      
+                    margin-top: -27px;         
+                    color: rgb(1, 163, 101);    
+                }
+                p{
+                    color: rgba(0, 0, 0, 0.8);
+                    font-size: 0.48rem !important; 
+                    @include mobile-view(600px){
+                        font-size: 0.65rem !important;
+                   }
+                }
+            }
+        }
+    } 
+    div.d-flex{
+        @include mobile-view(600px){
+            flex-direction: column;
+       }
+        img{
+            height: 200px;
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            @include mobile-view(600px){
+                height: 170px;
+                width: 170px;
+           }
+        }
+        &>div{
+            width: 60%;
+            @include mobile-view(600px){
+                 width: 100%;
+           }
+            
+            h5{
+                font-size: 0.9rem !important;
+                font-weight: 600;
+                letter-spacing: 0.9px;
+                color: rgb(2, 175, 109);
+                @include mobile-view(600px){
+                    text-align: center;
+                    margin-top: 1rem;
+                    font-size: 1rem !important;
+               }
+            }
+            p{
+                font-size: 0.5rem !important;
+                color: rgba(0, 0, 0, 0.8);
+                @include mobile-view(600px){
+                    font-size: 0.68rem !important;
+                    text-align: center;
+               }
+                span{
+                    color: rgb(1, 163, 101);
+                    font-size: inherit !important;
+                }
+            }
+            a{
+                background: rgb(1, 163, 101) !important;
+                border: none;
+                font-size: 0.45rem !important;
+                @include mobile-view(600px){
+                    width: 250px;
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    font-size: 0.7rem !important;
+               }
+            }
+        }
+    }
+}

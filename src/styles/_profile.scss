@@ -1,0 +1,279 @@
+@import 'responsive' ;
+
+div.profile{
+    div.d-flex{
+        @include mobile-view(600px){
+            flex-direction: column;
+        }
+        div.profile-info{
+            img{
+                height: 170px;
+                width: 170px;
+                border-radius: 50%;
+                object-fit: cover;
+                @include mobile-view(600px){
+                     display: block;
+                     height: 160px;
+                     width: 160px;
+                     margin-left: auto !important;
+                     margin-right: auto !important;
+                     margin-top: 0.5rem !important;
+                }
+            }            
+            button.modal-toggler,button.my-starts,a{
+               font-size: 0.5rem !important;
+               width: 190px;
+               display: block;
+               padding-top: 3px !important;
+               padding-bottom: 3px !important;
+               text-align: center !important;
+               border-radius: 20px;
+               &:hover{ background:  rgb(0, 152, 93); color: rgb(255, 255, 255) !important; }
+               @include mobile-view(600px){
+                width: 100%;
+                font-size: 0.7rem !important;
+               }
+            }
+            p{
+                font-size: 0.41rem !important;
+                color: rgb(75, 74, 74);
+                @include mobile-view(600px){                   
+                    font-size: 0.6rem !important;
+                    text-align: center;
+                    a{
+                        font-size: 0.9rem !important;
+                    }
+                 }
+            }
+        }
+        div.r-wrapper{
+            h5{
+                font-size: 1rem !important;
+                letter-spacing: 0.9px;
+            }
+            p{
+                color: rgb(92, 92, 92);
+            }
+        }
+    }
+     div.rentals-and-reviews{
+         ul{
+             li{
+                 a{
+                     font-size: 0.5rem !important;
+                     border-radius: 30px;
+                     color: rgb(0, 0, 0);
+                     @include mobile-view(600px){                   
+                        font-size: 0.64rem !important;                       
+                     }
+                 }
+                 a.active{
+                     background: rgb(0, 152, 93);
+                 }
+             }
+         }
+         .tab-content{
+             .tab-pane{
+                 img{
+                     height: 140px;
+                     width: 140px;
+                 }
+                 h5{
+                    font-size: 0.87rem !important;
+                    @include mobile-view(600px){                   
+                        font-size: 0.9rem !important;                       
+                     }
+                 }
+                 p{
+                    font-size: 0.5rem !important;
+                    color: rgb(31, 31, 31);
+                    @include mobile-view(600px){                   
+                        font-size: 0.64rem !important;                       
+                     }
+                 }
+                 a.btn{
+                     display: block;
+                     font-size: 0.48rem !important;
+                     border-radius: 25px;
+                     background: rgb(0, 152, 93);
+                     width: 180px;
+                     &:hover,&:active,&:focus,&:visited{
+                         box-shadow: 0 0 0 transparent;
+                         background: rgb(0, 152, 93);
+                     }
+                     @include mobile-view(600px){                   
+                        font-size: 0.64rem !important;                       
+                     }
+                 }
+             }
+         }
+     }
+     #account-settings{
+         div.modal-dialog{
+             div.modal-content{
+                 div.modal-header{
+                     h4.modal-title{
+                         font-size: 0.75rem !important;
+                         font-weight: 500;
+                         letter-spacing: 1px;
+                         @include mobile-view(600px){
+                            font-size: 0.85rem !important;
+                         }
+                     }
+                 }
+                 div.modal-body{
+                     div.contact-preference{
+                        h6{
+                            font-size: 0.66rem !important;
+                            @include mobile-view(600px){
+                                font-size: 0.74rem !important;
+                             }
+                        }
+                        p.d-flex{                        
+                             span{
+                                font-size: 0.45rem !important;
+                                @include mobile-view(600px){
+                                    font-size: 0.56rem !important;                                    
+                                 }
+                             }
+                             span.text-success{
+                                font-size: 0.5rem !important;
+                                @include mobile-view(600px){
+                                    font-size: 0.63rem !important;
+                                 }
+                             }
+                        }
+                        p{
+                            font-size: 0.45rem !important;
+                            @include mobile-view(600px){
+                                font-size: 0.53rem !important;
+                             }
+                        }
+                     }
+                 }
+             }
+         }
+     }
+     #my-starts{
+        div.modal-dialog{
+            div.modal-content{
+                div.modal-header{
+                    h4.modal-title{
+                        font-size: 0.75rem !important;
+                        font-weight: 500;
+                        letter-spacing: 1px;
+                        @include mobile-view(600px){
+                           font-size: 0.85rem !important;
+                           font-weight: 600;
+                        }
+                    }
+                }
+                div.modal-body{
+                    div.earnings{
+                        @include mobile-view(600px){
+                            flex-direction: row;     
+                            flex-wrap: wrap;  
+                            justify-content: center;                                              
+                         }
+                        div.d-flex{
+                            @include mobile-view(600px){
+                                 width: 100%;                                                                                  
+                             }
+                            img{
+                                height: 90px;
+                                width: 90px;    
+                                margin-top: -10px;      
+                                @include mobile-view(600px){
+                                    height: 150px;
+                                    width: 150px; 
+                                    margin-top: -0.5rem !important;
+                                }                     
+                            }    
+                             h5{
+                                    font-weight: 600;
+                                    font-size: 0.8rem !important;
+                                    @include mobile-view(600px){
+                                        font-size: 1.2rem !important;                                       
+                                     }
+                                }                        
+                        }
+                        div{
+                            font-size: 0.8rem !important;
+                            text-align: center;
+                            @include mobile-view(600px){
+                                font-size: 1.1rem !important;                               
+                                font-weight: 600;
+                             }
+                            h5{
+                                font-weight: 300;
+                                font-size: 0.5rem !important;
+                                @include mobile-view(600px){
+                                    font-size: 0.8rem !important;                               
+                                 }
+                            }
+                        }
+                        div.rentals{                                                             
+                            @include mobile-view(600px){
+                                width: 45% !important;
+                                margin-top: 0.6rem !important;                       
+                             }                        
+                        }
+                    }
+                    div.reports{
+                        h5{
+                            button{
+                                font-size: 0.44rem !important;
+                                border-radius: 25px;
+                                border: none;
+                                background: rgb(5, 180, 113);                               
+                                &:hover,&:active,&:focus,&:visited{
+                                    box-shadow: 0 0 0 transparent;
+                                    background: rgb(0, 152, 93);
+                                }
+                                @include mobile-view(600px){                   
+                                   font-size: 0.62rem !important;                       
+                                }                            
+                            }
+                        }
+                        div.row{
+                            div.col-12{
+                                box-shadow: 0 0 4px rgba(0,0,0,0.3);
+                                padding-top: 5px;
+                                padding-bottom: 5px;
+                                @include tablet-view(900px,30000px){
+                                    width: 48% !important;
+                                }
+                                p{
+                                    font-size: 0.5rem !important;
+                                    @include mobile-view(600px){
+                                        font-size: 0.75rem !important;
+                                        text-align: left;
+                                        font-weight: 600;
+                                    }
+                                }
+                                div{
+                                    font-size: 0.47rem !important;  
+                                    @include mobile-view(600px){                   
+                                        font-size: 0.6rem !important;                       
+                                     }  
+                                    big{
+                                        font-size: 0.7rem !important;
+                                    }
+                                    span{
+                                        font-size: inherit !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            p.note{
+                font-size: 0.45rem !important;
+                @include mobile-view(600px){
+                    font-size: 0.6rem !important;
+                }
+            }
+        }
+     }
+}

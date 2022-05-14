@@ -1,0 +1,90 @@
+//media query break points
+@import 'responsive' ;
+
+footer{
+    background:rgb(237, 248, 247);
+    div.row{
+        div.social-media{
+             img{
+                 width: 140px;
+                 height: 80px;
+                 @include mobile-view(){
+                    width: 100px;
+                    height: 60px;
+                 }
+             }
+             p{
+                 font-size:0.47rem !important ;
+                 @include mobile-view(){
+                    font-size:0.65rem !important ;
+                 }
+             }
+             a{
+                 font-size: 1.2rem !important;
+                 color: rgba(0,0,0,0.7);
+                 margin-right: 1rem;
+             }
+        }
+        div.about-us{
+            h5{ 
+                  font-size: 0.6rem !important;
+                  @include mobile-view(){
+                    font-size:0.8rem !important ;
+                    margin-top: 10px;
+                    font-weight: 600;
+                   }
+                }
+            ul{            
+                li{
+                    list-style: none;  
+                    display: block;                  
+                     a{ 
+                          color: rgba(0,0,0,0.9);
+                          font-size: 0.43rem !important;                          
+                          transition: color 0.1s;
+                          width: 160px !important;
+                          &:hover{
+                            color: rgb(0, 152, 93);
+                          }
+                          @include mobile-view(){
+                            font-size:0.65rem !important ;
+                         }
+                     }
+                }
+            }
+        }
+        div.get-intouch{
+            h5{ 
+                 font-size: 0.6rem !important;
+                 @include mobile-view(){
+                    font-size:0.81rem !important ;
+                    margin-top: 10px;
+                    font-weight: 600;
+                 }
+             }
+            a{
+                color: rgba(0,0,0,0.9);
+                          font-size: 0.41rem !important;                                                    
+                          transition: color 0.1s;                                              
+                          @include mobile-view(){
+                            font-size:0.65rem !important ;
+                         }                           
+           }
+           p{
+              font-size: 0.41rem !important; 
+              @include mobile-view(){
+                font-size:0.63rem !important ;
+             }
+                span.fas{
+                    opacity: 0.7;
+                }
+           }
+        }
+    }
+    p{
+        font-size: 0.4rem !important;
+        @include mobile-view(){
+            font-size:0.52rem !important ;
+         }
+    }
+}
