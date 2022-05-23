@@ -1,7 +1,7 @@
 import React from 'react'
 import Search from './Search'
 
-const Header = () => {
+const Header = ({title}) => {
  
     return (
         <header className='page-header'>
@@ -9,10 +9,10 @@ const Header = () => {
                 <div className="header-text-wrapper">
                     <div className='shadow-box bg-white ms-2  px-3 py-5 py-md-3 mt-md-3'>
                         <h5>  
-                           London Sewing Machine Hire
+                           {title} Hire
                         </h5>
                         <p>
-                           Cheap sewing machine rental from owners near you.
+                           Cheap {title} rental from owners near you.
                         </p>
                         <Search />   
                        </div>  

@@ -16,3 +16,15 @@
     appearance: none;
     width: 100%;
 }
+
+.description-box{
+    border: 1px solid gray;
+    border-radius: 5px;
+    font-size: 10px !important;
+    line-height: 24px;
+    padding: 10px;
+}
+
+#root > div > div > form > div.input-wrapper > div.description-box > div > div > span > {
+    font-size: 10px !important;
+}

@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 const ListAnItem = () => {
     
     React.useEffect( () => window.scrollTo({ top:0 , left:0 , scrollBehaviour : 'smooth' }))
-    const {  isAuth } = useSelector( state => state.login )
+    const  isAuth  = useSelector( state => state.auth.isLoggedIn )
   return (
     <Fragment>
         <Navbar />

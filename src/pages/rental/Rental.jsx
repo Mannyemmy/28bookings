@@ -11,32 +11,31 @@ import Reviews from './components/Reviews'
 import MoreItems from './components/MoreItems'
 import ExploreOtherOptions from './components/ExploreOtherOptions'
 import WhyRentWithUs from './components/WhyRentWithUs'
+import { useParams } from 'react-router-dom'
+import { useGetItemBySlugQuery } from '../../services/itemsApi'
+import RentalLoader from "./components/RentalLoader";
+
  
 
 const Rental = () => {
-
+  let {slug} = useParams();
+  const { data, error, isLoading, isFetching, isSuccess } = useGetItemBySlugQuery(slug)
   React.useEffect( () => window.scrollTo({ top:0 , left:0 , scrollBehaviour : 'smooth' }))
 
-  const images = [
-    require("../../assets/asset13.jpeg") ,
-    require("../../assets/asset12.png") ,     
-    require("../../assets/asset14.png") ,
-    require("../../assets/asset17.jpeg"),
-    require("../../assets/asset16.png")       
-  ]
+
 
   const pricing = [
       {
          duration : 'Daily',
-         price : ' ₦1500.00/day'
+         price : `₦${data?.item.daily_price}/day`
       } ,
       {
         duration : ' 7 Days +',
-        price : ' ₦1500.00/day'
+        price : `₦${data?.item.weekly_price}/week`
      } ,
      {
       duration : '30 Days +',
-      price : ' ₦800.00/day'
+      price : `₦${data?.item.monthly_price}/month`
       } 
   
    ]
@@ -44,7 +43,15 @@ const Rental = () => {
   return (
     <>
        <Navbar />
-       <div className='rental-page'>
+       {
+         isFetching ? (
+         <div style={{width: '100%', marginTop: '10px'}}>
+           <RentalLoader viewBox="0 0 700 360"/>
+         </div>
+         
+         ) : (
+
+          <div className='rental-page'>
               <div className="row w-100 p-0 m-0 mx-auto mt-2 mt-md-3">
                    <div className="col-12 col-md-7 px-0 px-md-2 carousel-container">
                        <Carousel dynamicHeight = { false }
@@ -52,24 +59,27 @@ const Rental = () => {
                                  showIndicators = { false }
                         >
                            {
-                             images.map( (img,id) => {
-                                 return(
-                                       <div className='slider' key={id}>
-                                         <img  src={ img } />
-                                       </div>
-                                 )
-                             } )
+                             
+                             [...Array(data?.item.imagesCount)].map((_, index) =>{
+
+                              return (
+                                <div className='slider' key={index}>
+                                         <img  src={ `${data?.item.imagesCdnUrl}nth/${index}/` } alt="" />
+                                        </div>
+                              )
+                             })
+                          
                            }
                        </Carousel> 
                    </div>
                    <div className="col-12 col-md-5 price-wrapper mt-3 mt-md-1">
                           <h5>
-                              Projector Screen - Epson 50-inch Screen
+                              {data?.item.title}
                           </h5>
                           <div className="d-flex justify-content-between mt-3 align-items-center px-md-2">
                                <div className="d-flex align-items-center">
                                    <span className='svg-image d-inline-block me-1'></span>
-                                   <span> Antonio in London  </span>
+                                   <span> {`${data.user.first_name } in ${data?.item.city}`}  </span>
                                </div>
                                <p className='m-0 p-0 '>  5.0  <i className="fas fa-star"></i> (3189) </p>
                           </div>
@@ -94,10 +104,10 @@ const Rental = () => {
                    </div>
                    <DateModal id='dateModal'  />
               </div>
-              <ProductDescription />
+              <ProductDescription description={data.item.description} path={data.category_path}/>
               <div className="px-1 px-md-3">
                    <div className="item-owned mt-2">
-                        <h5> Item owned by Antonio </h5>
+                        <h5> Item owned by {data.user.first_name} </h5>
                         <div className="d-flex ms-2 mx-2 mx-md-0">
                             <img src={  require('../../assets/anthony.jpg') } alt="user profile" />
                             <div className='ms-4'>
@@ -107,28 +117,27 @@ const Rental = () => {
                                             &nbsp;super lender
                                          </button> 
                                   </p>
-                                  <p className='small mb-1'>  Check out my profile to see all the items you can hire:</p>
-                                  <div className="divider">
-                                      .................................................................................
-                                  </div>
-                                  <div className="divider">
-                                      .................................................................................
-                                  </div>
+                                  {
+                                    data.user.bio
+                                  }
                                   <span> Typically replies within a few minutes </span>
                                   <div className="btn-wrapper mt-2">
-                                      <Link to='/rental' className='btn me-2 py-1'> Messege Antonio  </Link>
-                                      <Link to='/rental' className='btn py-1'> See Antonio's profile  </Link>
+                                      <Link to={`/profile/${data?.item.user}`} className='btn me-2 py-1'> Message {data.user.first_name}  </Link>
+                                      <Link to={`/profile/${data?.item.user}`} className='btn py-1'> See {data.user.first_name} profile  </Link>
                                   </div>
                             </div>
                         </div>
                     </div>
               </div>
-              <OtherItems />
+              <OtherItems user_items = {data?.user_items} user_id={data?.user.id} />
               <Reviews />
               <MoreItems />
               <ExploreOtherOptions />
               <WhyRentWithUs />
        </div>
+         )
+       }
+       
     </>
   )
 }

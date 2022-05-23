@@ -1,4 +1,5 @@
-import React,{ useState } from 'react'
+import React,{ useState } from 'react';
+import {register} from "../../../services/authServices";
 
 const SignIn = ({setShowSignUp}) => {
 
@@ -6,10 +7,13 @@ const SignIn = ({setShowSignUp}) => {
 
  const [  signIn , setSignIn  ] = useState({
      email : '' ,
-     fullName : '' ,
+     first_name : '' ,
+     last_name : '' ,
+     phone : '' ,
      password : '' ,
      confirmPassword : '' ,
-     errorMessege : '' ,
+     errorMessage : '' ,
+     successMessage : '',
      isOk : true
  })
 
@@ -23,63 +27,99 @@ const SignIn = ({setShowSignUp}) => {
      setSignIn({...signIn ,  [event.target.name] : event.target.value })
  }
 
- const handleSubmit = event => {
+ const handleSubmit = async (event) => {
      event.preventDefault() ;
      /* client side validation */
      // dom selector function
      const $ = element => document.querySelector(element)
       
-     const { isOk , fullName , password , confirmPassword , errorMessege , email } = signIn 
+     const { isOk  , password , confirmPassword , errorMessage , email, first_name, last_name, phone} = signIn 
      
      if( password.length < 8  && confirmPassword.length < 8 ) {
-        setSignIn({...signIn, isOk : false , errorMessege : 'Error! password should be atleast 8 characters.'}) 
+        setSignIn({...signIn, isOk : false , errorMessage : 'Error! password should be atleast 8 characters.'}) 
     }
      
      if( password !== confirmPassword ) {
-        setSignIn({...signIn, isOk : false , errorMessege : 'Error! the two password did no match.'}) 
+        setSignIn({...signIn, isOk : false , errorMessage : 'Error! the two password did no match.'}) 
     }
 
     //check if email address is valid 
     if( (! email.includes('@') ) || email.startsWith('@') || email.endsWith('@') ){ 
-       setSignIn({...signIn, isOk : false , errorMessege : 'Please use a valid email address.'})
+       setSignIn({...signIn, isOk : false , errorMessage : 'Please use a valid email address.'})
        $('.sign-up-email').focus()
     }
 
-    if(!fullName || !password || !confirmPassword || !email){
-        setSignIn({...signIn, isOk : false , errorMessege : 'Please fill all the required fields.'})         
+    if(!first_name ||!last_name || !password || !confirmPassword || !email || !phone){
+        setSignIn({...signIn, isOk : false , errorMessage : 'Please fill all the required fields.'})         
     }      
      /* ------------------------- */   
      //send a form data to the server..
+     try {
+        const res = await register(first_name, last_name, email, password, phone)
+        if(res.status === 200){
+            setSignIn({...signIn, isOk : true , successMessage : 'Registration successful'}) 
+            handleSetShowSignup();
+        }else{
+            setSignIn({...signIn, isOk : false , errorMessage : res.detail})   
+        }
+      } catch (error) {
+          console.log(error);
+        setSignIn({...signIn, isOk : false , errorMessage : error.response.data.detail})  
+      }
+    
+
     
  }
 
   return (
     <div className='sign-in-container'  >
-        <form style={{width:'94%'}} className='mt-3 d-block mx-auto'>
+        <form style={{width:'94%'}} className='mt-1 d-block mx-auto'>
             <span className='btn-close d-close-r-sidebar text-reset d-inline-block p-2' data-bs-dismiss='offcanvas'>
             </span>              
              <h1> Hey There! </h1>
              <p className='mb-1'> Looks like you're  new here. Enter your details and get started. </p>
-             <span className="divider d-block mt-1 mb-2"></span>             
+             <span className="divider d-block  mb-1"></span>             
              <label htmlFor='email'> Email <sup className="text-danger"> * </sup> </label>
               <input 
                      type='email' 
                      name='email'
                      value={  signIn.email }
                      id='email'
-                     className='form-control py-3 py-md-2 sign-up-email' 
+                     className='form-control py-3 py-md-1 sign-up-email' 
                      placeholder='jhondoe@example.com'
                      onChange={ handleSignIn }     
                      maxLength = { 200 }                 
               />
-              <label htmlFor='name'>Full Name <sup className="text-danger"> * </sup> </label>
+              <label htmlFor='first_name'>First Name <sup className="text-danger"> * </sup> </label>
               <input 
                      type='text' 
-                     name='fullName'
-                     value={ signIn.fullName }
-                     id='name'
-                     className='form-control py-3 py-md-2' 
-                     placeholder='your name..'
+                     name='first_name'
+                     value={ signIn.first_name }
+                     id='first_name'
+                     className='form-control py-3 py-md-1' 
+                     placeholder='your first name..'
+                     onChange={ handleSignIn }   
+                     maxLength = { 200 }                    
+              />
+              <label htmlFor='last_name'>Last Name <sup className="text-danger"> * </sup> </label>
+              <input 
+                     type='text' 
+                     name='last_name'
+                     value={ signIn.last_name }
+                     id='last_name'
+                     className='form-control py-3 py-md-1' 
+                     placeholder='your last name..'
+                     onChange={ handleSignIn }   
+                     maxLength = { 200 }                    
+              />
+              <label htmlFor='phone'>Phone Number <sup className="text-danger"> * </sup> </label>
+              <input 
+                     type='text' 
+                     name='phone'
+                     value={ signIn.phone }
+                     id='phone'
+                     className='form-control py-3 py-md-1' 
+                     placeholder='your phone number..'
                      onChange={ handleSignIn }   
                      maxLength = { 200 }                    
               />
@@ -89,7 +129,7 @@ const SignIn = ({setShowSignUp}) => {
                      name='password'
                      value={ signIn.password }
                      id='password'
-                     className='form-control py-3 py-md-2' 
+                     className='form-control py-3 py-md-1' 
                      placeholder='password..'
                      onChange={ handleSignIn }     
                      maxLength = { 16 }                  
@@ -100,12 +140,12 @@ const SignIn = ({setShowSignUp}) => {
                      name='confirmPassword'
                      value={  signIn.confirmPassword }
                      id='c-password'
-                     className='form-control py-3 py-md-2' 
+                     className='form-control py-3 py-md-1' 
                      placeholder='confirm password..'
                     onChange={ handleSignIn }  
                     maxLength = { 16 } 
               />
-              <p className='status text-danger mt-1 m-0'>  { signIn.errorMessege } </p>
+              <p className='status text-danger mt-1 m-0'>  { signIn.errorMessage } </p>
               <p className='sign-in p-0 mb-2 pt-2 pt-md-0'> Already have an account ? 
                   <span className='text-primary ms-1' onClick={handleSetShowSignup}> Login </span>
               </p>

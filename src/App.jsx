@@ -31,8 +31,8 @@
                 <Route path={ '/edit-profile' } component = { EditProfile } />
                 <Route path={ '/create-item' } component = { CreateItem } />
                 <Route path={'/enterprise'} component={ Business } />
-                <Route path={ '/rental/:query' } children={ <Rental /> } />
-                <Route path={'/products/:query'} children={ <Product /> } />
+                <Route path={ '/rental/:slug' } children={ <Rental /> } />
+                <Route path={'/category/:slug'} children={ <Product /> } />
                 <Route path={'/search/:query'} children = { <SearchProduct /> } />
            </Switch>
            <Footer />

@@ -85,20 +85,20 @@ div.rental-page{
                 font-size: 0.6rem !important;
             }
         }
-        .description{
-            height: 310px;
-            overflow-y: hidden;
-            text-overflow: ellipsis;
-            @include mobile-view(){
-                height: 320px;
-            }
-            ul{
-                li{
-                    list-style: none;
-                    @include set-font-size(0.6rem, 00.45rem)
-                }
-             }
-          }          
+        // .description{
+        //     height: 310px;
+        //     overflow-y: hidden;
+        //     text-overflow: ellipsis;
+        //     @include mobile-view(){
+        //         height: 320px;
+        //     }
+        //     ul{
+        //         li{
+        //             list-style: none;
+        //             @include set-font-size(0.6rem, 00.45rem)
+        //         }
+        //      }
+        //   }          
        }
    div.item-owned{
           h5{
