@@ -11,6 +11,7 @@ const SignIn = ({setShowSignUp}) => {
      last_name : '' ,
      phone : '' ,
      password : '' ,
+     location : '',
      confirmPassword : '' ,
      errorMessage : '' ,
      successMessage : '',
@@ -33,7 +34,7 @@ const SignIn = ({setShowSignUp}) => {
      // dom selector function
      const $ = element => document.querySelector(element)
       
-     const { isOk  , password , confirmPassword , errorMessage , email, first_name, last_name, phone} = signIn 
+     const { isOk  , password , confirmPassword , errorMessage , email, first_name, last_name, phone, location} = signIn 
      
      if( password.length < 8  && confirmPassword.length < 8 ) {
         setSignIn({...signIn, isOk : false , errorMessage : 'Error! password should be atleast 8 characters.'}) 
@@ -49,13 +50,13 @@ const SignIn = ({setShowSignUp}) => {
        $('.sign-up-email').focus()
     }
 
-    if(!first_name ||!last_name || !password || !confirmPassword || !email || !phone){
+    if(!first_name ||!last_name || !password || !confirmPassword || !email || !phone || !location){
         setSignIn({...signIn, isOk : false , errorMessage : 'Please fill all the required fields.'})         
     }      
      /* ------------------------- */   
      //send a form data to the server..
      try {
-        const res = await register(first_name, last_name, email, password, phone)
+        const res = await register(first_name, last_name, email, password, phone, location)
         if(res.status === 200){
             setSignIn({...signIn, isOk : true , successMessage : 'Registration successful'}) 
             handleSetShowSignup();
@@ -120,6 +121,17 @@ const SignIn = ({setShowSignUp}) => {
                      id='phone'
                      className='form-control py-3 py-md-1' 
                      placeholder='your phone number..'
+                     onChange={ handleSignIn }   
+                     maxLength = { 200 }                    
+              />
+              <label htmlFor='address'>Address <sup className="text-danger"> * </sup> </label>
+              <input 
+                     type='text' 
+                     name='location'
+                     value={ signIn.location }
+                     id='location'
+                     className='form-control py-3 py-md-1' 
+                     placeholder='your address..'
                      onChange={ handleSignIn }   
                      maxLength = { 200 }                    
               />

@@ -5,7 +5,8 @@ export const register = async (
   last_name,
   email,
   password,
-  phone
+  phone,
+  location
 ) => {
   const res = await api.post("/signup", {
     first_name,
@@ -13,6 +14,7 @@ export const register = async (
     phone,
     email,
     password,
+    location
   });
   return res;
 };
