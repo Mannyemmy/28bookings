@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useGetUserItemsQuery } from "../../../services/itemsApi";
+
 
 const RentalAndReviews = () => {
+
+    const { data, error, isLoading, isFetching, isSuccess } =
+    useGetUserItemsQuery();
+
   return (
     <div className='rentals-and-reviews mt-3'>       
     <ul className='nav nav-pills d-flex justify-content-center'>
@@ -15,7 +21,15 @@ const RentalAndReviews = () => {
 
         <div className='tab-content mt-2 d-flex justify-content-center mb-4 mb-sm-3'>
             <div className='tab-pane active' id='rental-shops'> 
-                  <img src={ require('../../../assets/coins.PNG') }
+            {
+                isSuccess && (
+                    <>
+                    {
+                  data.length > 0 ? (
+  <h1>ore</h1>
+                ) : (
+                    <>
+                    <img src={ require('../../../assets/coins.PNG') }
                        alt="coins"
                        className='d-block mx-auto mt-2'
                    />
@@ -24,6 +38,15 @@ const RentalAndReviews = () => {
                    <Link to={'/list-an-item'} className='btn btn-success py-1 mx-auto mt-2' >
                          List an Item 
                   </Link>
+                    </>
+                )
+                    }
+                    
+                    </>
+                )
+              
+            }
+                  
               </div>
             <div className='tab-pane  fade' id='reviews'> 
                  <p className='py-3 text-secondary text-center'>  no reviews quite yet. </p> 

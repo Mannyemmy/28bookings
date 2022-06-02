@@ -1,6 +1,7 @@
- import React from 'react'
+ import React,{ useContext, createContext, useState } from 'react'
  import {  BrowserRouter as Router , Route , Switch  } from 'react-router-dom'  
  import './styles/index.scss'
+ import './styles/tailwind.css'
  import Footer from './components/Footer'
  import HowItWorked from './pages/how-it-works/HowItWorked'
  import ListAnItem from './pages/list-an-item/ListAnItem'
@@ -15,6 +16,8 @@
  import Rental from './pages/rental/Rental'
  import Product from './pages/products/Product'
  import SearchProduct from './pages/search-product/SearchProduct'
+ import Message from './pages/inbox/Message'
+ import RentalMessage from './pages/rentals/RentalMessage'
  
  const App = () => {
     
@@ -34,6 +37,8 @@
                 <Route path={ '/rental/:slug' } children={ <Rental /> } />
                 <Route path={'/category/:slug'} children={ <Product /> } />
                 <Route path={'/search/:query'} children = { <SearchProduct /> } />
+                <Route path={'/message/:id'} children={<Message /> } />
+                <Route path={'/rental-inbox/:id'} children={<RentalMessage /> } />
            </Switch>
            <Footer />
       </Router>

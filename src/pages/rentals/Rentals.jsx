@@ -1,17 +1,36 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/_navbar/Navbar'
+import {useGetRentalInboxMessagesQuery} from "../../services/messagesApi"
+import Notifications from "../../components/rentals/Notifications"
 
 const Rentals = () => {
  
     React.useEffect( () => window.scrollTo({ top:0 , left:0 , scrollBehaviour : 'smooth' }))
+    const { data, error, isLoading, isFetching, isSuccess } =
+    useGetRentalInboxMessagesQuery();
 
     return (
     <>
       <Navbar />
        <div className='rentals'>
           <h1 className='border-bottom border-top py-2 ps-2 bi bi-bag-check'> Rentals </h1>
-          <div className='d-flex justify-content-center'>
+
+
+          <div className="d-flex justify-content-center mt-4 mb-5">
+          {isLoading ? (
+            <div className="d-flex justify-content-center">
+              <div className="spinner-grow text-success" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+            </div>
+          ) : (
+            <>
+              {data?.length > 0 ? (
+                
+                <Notifications  messages = {data}/> 
+              ) : (
+                <div className='d-flex justify-content-center'>
                 <div className='wrapper py-3'>
                     <img 
                          src={ require('../../assets/no-rental.PNG') }
@@ -29,6 +48,14 @@ const Rentals = () => {
                     </div>
                 </div>
           </div>
+              )}
+            </>
+          )}
+        </div>
+
+
+
+         
        </div>
     </>
   )

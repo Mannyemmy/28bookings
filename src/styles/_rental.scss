@@ -312,3 +312,23 @@ div.rental-page{
         }
     }
 }
+
+.rental-fee{
+    padding: 0 10px;
+}
+
+.rdrDefinedRangesWrapper {
+    display: none;
+}
+
+#dateModal > div > div > div.modal-footer.py-3.py-md-1 > div > div > div > h2{
+    font-size: 1.2em !important;
+}
+
+#root > div > div.row.w-100.p-0.m-0.mx-auto.mt-2.mt-md-3 > div:nth-child(4) > div > div > h2{
+    font-size: 1em !important;
+}
+
+#root > div > div.row.w-100.p-0.m-0.mx-auto.mt-2.mt-md-3 > div:nth-child(4) > div > div > div:nth-child(3){
+    font-size: 0.8em !important;
+}
