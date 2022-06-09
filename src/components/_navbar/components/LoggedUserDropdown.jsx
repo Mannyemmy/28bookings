@@ -40,6 +40,12 @@ const LoggedUserDropdown = () => {
             </Link>{" "}
           </li>
           <li>
+            <Link className="dropdown-item ps-2" to="/my-orders">
+              {" "}
+              Orders{" "}
+            </Link>{" "}
+          </li>
+          <li>
             <Link className="dropdown-item ps-2" to="/rentals">
               {" "}
               Rentals{" "}

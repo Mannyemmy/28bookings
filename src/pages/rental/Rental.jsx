@@ -172,7 +172,7 @@ const Rental = () => {
                   <span> Typically replies within a few minutes </span>
                   <div className="btn-wrapper mt-2">
                     <Link
-                      to={`/profile/${data?.item.user}`}
+                      to={`/chat?userId=${data?.item.user}`}
                       className="btn me-2 py-1"
                     >
                       {" "}
@@ -193,7 +193,7 @@ const Rental = () => {
           <OtherItems user_items={data?.user_items} user_id={data?.user.id} />
           <Reviews />
           <MoreItems />
-          <ExploreOtherOptions />
+        
           <WhyRentWithUs />
         </div>
       )}

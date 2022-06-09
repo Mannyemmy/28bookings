@@ -46,8 +46,8 @@ const Message = () => {
         style={{ width: "16em", fontSize: "1em !important" }}
         success
         title="Reservation rejected successfully!"
-        onConfirm={() => history.push("/inbox")}
-        onCancel={() => history.push("/inbox")}
+        onConfirm={() => history.push("/my-orders")}
+        onCancel={() => history.push("/my-orders")}
       />
     );
   };
@@ -77,8 +77,8 @@ const Message = () => {
         style={{ width: "16em", fontSize: "1em !important" }}
         success
         title="Booking status sent successfully!"
-        onConfirm={history.push("/inbox")}
-        onCancel={history.push("/inbox")}
+        onConfirm={history.push("/my-orders")}
+        onCancel={history.push("/my-orders")}
       >
         Once payment has been made you will be notified to drop off item
       </SweetAlert>

@@ -4,7 +4,7 @@ export const messagesApi = createApi({
   reducerPath: "messages",
   tagTypes: ['Messages', 'rentalMessages'],
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://pure-anchorage-21759.herokuapp.com/api/",
+    baseUrl: "http://localhost:8000/api/",
     prepareHeaders: (headers, { getState }) => {
       const token =
         JSON.parse(localStorage.getItem("token")) || getState().auth.token;
