@@ -20,7 +20,7 @@ import { isMobile } from "react-device-detect";
 
 import { useDispatch, useSelector } from "react-redux";
 
-let wsUrl = "ws://localhost:8000/ws/";
+let wsUrl = "wss://pure-anchorage-21759.herokuapp.com/ws/";
 
 function useQuery() {
   const { search } = useLocation();

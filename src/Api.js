@@ -3,7 +3,7 @@ import axios from "axios";
 
 const instance = axios.create({
     // .. where we make our configurations
-        baseURL: "http://localhost:8000/api/",
+        baseURL: "https://pure-anchorage-21759.herokuapp.com/api/",
     });
 
 

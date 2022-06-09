@@ -21,6 +21,8 @@ function useQuery() {
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
+let wsUrl = "wss://pure-anchorage-21759.herokuapp.com//ws/"
+
 const ChatUi = (props) => {
   const dispatch = useDispatch();
 
@@ -64,7 +66,7 @@ const ChatUi = (props) => {
   };
 
   const [socketUrl, setSocketUrl] = useState(
-    "ws://localhost:8000/ws/" + getChatId(to_user, clientId)
+    wsUrl + getChatId(to_user, clientId)
   );
   const [messageHistory, setMessageHistory] = useState([]);
 

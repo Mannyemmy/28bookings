@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const categoriesApi = createApi({
   reducerPath: "categoriesApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/"
+    baseUrl: "https://pure-anchorage-21759.herokuapp.com/api/"
   }),
   endpoints: (builder) => ({
     getCategories: builder.query({
