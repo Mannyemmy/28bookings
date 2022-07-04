@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import {url} from "../../helper"
 
 const ChatUserList = (props) => {
   const { chatUsers } = props;
@@ -17,7 +18,7 @@ const ChatUserList = (props) => {
             >
               <img
                 className="tw-rounded-full tw-object-cover tw-w-[32px] tw-h-[32px]"
-                src={chatUser.to_user.profile[0].picture}
+                src={`${url}${chatUser.to_user.profile[0].picture}`}
                 alt={chatUser.to_user.to_user_name}
               />
 
@@ -42,7 +43,7 @@ const ChatUserList = (props) => {
             >
               <img
                 className="tw-rounded-full tw-object-cover tw-w-[32px] tw-h-[32px]"
-                src={chatUser.from_user.profile[0].picture}
+                src={`${url}${chatUser.from_user.profile[0].picture}`}
                 alt={chatUser.to_user_name}
               />
 

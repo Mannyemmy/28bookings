@@ -40,7 +40,7 @@ const RentalReviews = () => {
                   }) }
              </div>
              <div className="d-flex justify-content-center mt-3 mt-md-2">
-               <Link to='/products/sewing-machine' className='btn btn-light py-1 '>  Browse Items </Link>
+               <Link to='#' className='btn btn-light py-1 '>  Browse Items </Link>
             </div>
        </div>       
     </div>

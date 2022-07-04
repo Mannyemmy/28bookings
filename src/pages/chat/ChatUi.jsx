@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 import { useGetChatMessagesMutation } from "../../services/chatsApi";
 import { Link } from "react-router-dom";
 import {useGetUserQuery} from "../../services/usersApi"
+import {url} from "../../helper"
 
 import { isMobile } from "react-device-detect";
 
@@ -21,7 +22,8 @@ function useQuery() {
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
-let wsUrl = "wss://pure-anchorage-21759.herokuapp.com/ws/"
+// wss://pure-anchorage-21759.herokuapp.com
+let wsUrl = `${process.env.REACT_APP_BASE_CHAT_URL}/ws/`
 
 const ChatUi = (props) => {
   const dispatch = useDispatch();
@@ -171,7 +173,7 @@ const ChatUi = (props) => {
                    <div className="tw-relative tw-flex tw-items-center tw-mt-2  tw-px-3 tw-py-1 tw-border-b tw-border-0 tw-border-solid tw-border-gray-300">
                 <img
                   className="tw-object-cover tw-w-8 tw-h-8 tw-rounded-full"
-                  src={to_chat_user?.profile[0].picture}
+                  src={`${url}${to_chat_user?.profile[0].picture}`}
                   alt="username"
                 />
                 <span className="tw-block tw-ml-2 tw-font-bold tw-text-gray-600">

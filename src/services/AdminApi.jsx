@@ -1,0 +1,37 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {setSettings} from "../features/slices/authSlice";
+
+export const adminApi = createApi({
+  reducerPath: "admin",
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${process.env.REACT_APP_BASE_URL}/api/`
+  }),
+  endpoints: (builder) => ({
+    getContacts: builder.query({
+      query: () => `contacts`,
+    }),
+    createContact: builder.mutation({
+        query: ({ ...patch }) => ({
+          url: `contacts`,
+          method: "POST",
+          body: patch,
+        })
+      }),
+    getSettings: builder.query({
+      query : ()=> `settings`,
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setSettings(data));
+        } catch (error) {}
+      },
+    })
+
+  }),
+});
+
+export const {
+  useGetContactsQuery,
+  useCreateContactMutation,
+  useGetSettingsQuery
+} = adminApi;

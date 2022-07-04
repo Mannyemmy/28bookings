@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from  'react-router-dom'
 import { Link } from 'react-router-dom'
 
-const OtherItems = ({user_items, user_id}) => {
+const OtherItems = ({user_items, user}) => {
 
   const history = useHistory() ;
   
@@ -19,7 +19,7 @@ const handleNavigateToRentalPage = (slug) => {
 
   return (
     <div className='other-items px-1 px-md-4 mt-5 mt-md-4 mb-3 '>
-          <h5> Other items from Antonio  </h5>
+          <h5> Other items from {user.first_name}  </h5>
           <div className="d-flex justify-content-between p-0 m-0 mt-3">
                <div className='prev-btn-wrapper h-100 d-flex align-items-center m-hide'>
                     <button onClick={ handlePrevClick } className='btn btn-success prev-btn bi bi-chevron-left'></button>
@@ -41,7 +41,7 @@ const handleNavigateToRentalPage = (slug) => {
                    <button onClick={ handleNextClick } className='btn btn-success prev-btn bi bi-chevron-right'></button>
                </div>
           </div>
-          <Link to={`/profile/${user_id}`} className='btn d-block mx-auto mt-3 py-1'> See all listings from Antonio </Link>
+          <Link to={`/profile/${user.id}`} className='btn d-block mx-auto mt-3 py-1'> See all listings from {user.first_name} </Link>
     </div>
   )
 }

@@ -4,7 +4,7 @@ export const messagesApi = createApi({
   reducerPath: "messages",
   tagTypes: ['Messages', 'rentalMessages'],
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://pure-anchorage-21759.herokuapp.com/api/",
+    baseUrl: `${process.env.REACT_APP_BASE_URL}/api/`,
     prepareHeaders: (headers, { getState }) => {
       const token =
         JSON.parse(localStorage.getItem("token")) || getState().auth.token;
@@ -22,17 +22,29 @@ export const messagesApi = createApi({
       query: () => `inbox/`,
       providesTags: ['Messages'],
     }),
+    getRentalDates: builder.query({
+      query: (id) => `rentals/pending/${id}`
+    }),
     getRentalInboxMessages: builder.query({
       query: () => `rentals/`,
       providesTags: ['rentalMessages'],
     }),
 
     paymentSuccess: builder.mutation({
-      query: ({ rental_id, ...patch}) => ({
-        url: `payment_success/${rental_id}`,
-        method: "PATCH",
-        body: patch,
-      }),
+
+
+      query(data) {
+      
+        return {
+          url: `payment_success`,
+          method: 'PATCH',
+          body : data
+        }},
+      // query: (data) => ({
+      //   url: `payment_success/${rental_id}`,
+      //   method: "PATCH",
+      //   body: patch,
+      // }),
       invalidatesTags: ['rentalMessages'],
     }),
     updateIsRead: builder.mutation({
@@ -72,6 +84,7 @@ export const messagesApi = createApi({
 });
 
 export const {
+  useGetRentalDatesQuery,
   useGetInboxMessagesQuery,
   useUpdateIsReadMutation,
   useRejectBookingMutation,

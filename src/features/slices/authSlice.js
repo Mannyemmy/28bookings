@@ -5,8 +5,8 @@ const token = JSON.parse(localStorage.getItem("token"));
 const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = token
-  ? { isLoggedIn: true, user: user,error : false, errorMessage: "" , token : token}
-  : { isLoggedIn: false, user: null,error : false, errorMessage: "" };
+  ? { isLoggedIn: true, user: user,error : false, errorMessage: "" , token : token, settings : null}
+  : { isLoggedIn: false, user: null,error : false, errorMessage: "" , settings : null };
 
 const authSlice = createSlice({
   name: "auth",
@@ -14,6 +14,9 @@ const authSlice = createSlice({
   reducers: {
     userRegisterSuccess: (state, action) => {
       state.isLoggedIn = false;
+    },
+    setSettings: (state, action) => {
+      state.settings = action.payload;
     },
     userRegisterFailure: (state, action) => {
       state.isLoggedIn = false;
@@ -41,6 +44,7 @@ export const {
   userLoginFailure,
   userRegisterFailure,
   userLoginSuccess,
+  setSettings,
   logout,
 } = authSlice.actions;
 export default authSlice.reducer;

@@ -13,14 +13,14 @@ import {
 } from "../../services/chatsApi";
 
 import { useGetUserQuery } from "../../services/usersApi";
-
+import {url} from "../../helper"
 import ChatUserList from "./ChatUserList";
 
 import { isMobile } from "react-device-detect";
 
 import { useDispatch, useSelector } from "react-redux";
 
-let wsUrl = "wss://pure-anchorage-21759.herokuapp.com/ws/";
+let wsUrl =  `${process.env.REACT_APP_BASE_CHAT_URL}/ws/`
 
 function useQuery() {
   const { search } = useLocation();
@@ -246,7 +246,7 @@ const ChatUi = (props) => {
                     <div className="tw-relative tw-flex tw-items-center tw-px-3 tw-py-1 tw-border-b tw-border-0 tw-border-solid tw-border-gray-300">
                       <img
                         className="tw-object-cover !tw-w-8 !tw-h-8 tw-rounded-full"
-                        src={chatUsers[activeChat].to_user.profile[0].picture}
+                        src={`${url}${chatUsers[activeChat].to_user.profile[0].picture}`}
                         alt="username"
                       />
                       <span className="tw-block tw-ml-2 tw-font-bold tw-text-gray-600">
@@ -257,7 +257,7 @@ const ChatUi = (props) => {
                     <div className="tw-relative tw-flex tw-items-center tw-px-3 tw-py-1 tw-border-b tw-border-0 tw-border-solid tw-border-gray-300">
                       <img
                         className="tw-object-contain !tw-w-8 !tw-h-8 tw-rounded-full"
-                        src={chatUsers[activeChat].from_user.profile[0].picture}
+                        src={`${url}${chatUsers[activeChat].from_user.profile[0].picture}`}
                         alt="username"
                       />
                       <span className="tw-block tw-ml-2 tw-font-bold tw-text-gray-600">

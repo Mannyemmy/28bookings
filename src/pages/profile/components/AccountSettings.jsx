@@ -12,18 +12,18 @@ const AccountSettings = () => {
 
   return (
     <>
-       <button class='btn modal-toggler py-0 my-0' data-bs-toggle='modal' data-bs-target='#account-settings'>
+       <button className='btn modal-toggler py-0 my-0' data-bs-toggle='modal' data-bs-target='#account-settings'>
            Account Settings
         </button>
  
-        <div class='modal  fade' id='account-settings'>
-            <div class='modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable'>
-                <div class='modal-content'>     
-                    <div class='modal-header py-2 ps-1'>
-                        <h4 class='modal-title py-0 my-0 bi bi-gear'> Account Settings </h4>
-                        <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+        <div className='modal  fade' id='account-settings'>
+            <div className='modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable'>
+                <div className='modal-content'>     
+                    <div className='modal-header py-2 ps-1'>
+                        <h4 className='modal-title py-0 my-0 bi bi-gear'> Account Settings </h4>
+                        <button type='button' className='btn-close' data-bs-dismiss='modal'></button>
                     </div>     
-                    <div class='modal-body px-2 pt-2'>
+                    <div className='modal-body px-2 pt-2'>
                        <div className='contact-preference'>
                              <h6 className='mb-0'> Contact preferences  </h6>
                              <p className='d-flex justify-content-between'>

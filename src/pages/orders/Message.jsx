@@ -157,7 +157,7 @@ const Message = () => {
           <div className="tw-grid tw-grid-cols-1  tw-my-2 tw-gap-2 md:tw-mx-auto md:tw-w-80">
             {/* <button
                 type="button"
-                class="btn btn-danger btn-block"
+                className="btn btn-danger btn-block"
                 // onClick={hande}
                 // add code to complaint form page
               >
@@ -165,7 +165,7 @@ const Message = () => {
               </button> */}
             <button
               type="button"
-              class="btn btn-success btn-block"
+              className="btn btn-success btn-block"
               onClick={handleItemReturnAccept}
             >
               Item Received
@@ -287,14 +287,14 @@ const Message = () => {
             <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-my-2 tw-gap-2 md:tw-mx-auto md:tw-w-80">
               <button
                 type="button"
-                class="btn btn-danger btn-block"
+                className="btn btn-danger btn-block"
                 onClick={handleReject}
               >
                 Reject
               </button>
               <button
                 type="button"
-                class="btn btn-success btn-block"
+                className="btn btn-success btn-block"
                 onClick={handleAccept}
               >
                 Schedule

@@ -1,35 +1,42 @@
 import React from 'react'
+import {formatCurrency} from "../../../helper"
+import {useGetRentalInboxMessagesQuery, useGetInboxMessagesQuery} from "../../../services/messagesApi";
 
-const MyStarts = () => {
+const MyStarts = ({user}) => {
+
+    const {data, isLoading, isSuccess}  = useGetRentalInboxMessagesQuery();
+    const {data : orders} = useGetInboxMessagesQuery();
 
   return (
     <>
-       <button class='btn my-starts py-0 my-0' data-bs-toggle='modal' data-bs-target='#my-starts'>
-           My Starts
+       <button className='btn my-starts py-0 my-0' data-bs-toggle='modal' data-bs-target='#my-starts'>
+           My Stats
         </button> 
-        <div class='modal  fade' id='my-starts'>
-            <div class='modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down'>
-                <div class='modal-content'>     
-                    <div class='modal-header py-3 py-md-2'>
-                        <h4 class='modal-title'> My Statistics </h4>
-                        <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
+        <div className='modal  fade' id='my-starts'>
+            <div className='modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down'>
+                <div className='modal-content'>     
+                    <div className='modal-header py-3 py-md-2'>
+                        <h4 className='modal-title'> My Statistics </h4>
+                        <button type='button' className='btn-close' data-bs-dismiss='modal'></button>
                     </div>     
-                    <div class='modal-body'>
+                    <div className='modal-body'>
                         <div className='earnings d-flex border-bottom pb-1 w-100'>
                             <div className='d-flex'>
                                 <img src={ require('../../../assets/coins.PNG') } alt='coins' />
                                 <div>
-                                    <h5 className='mb-1'> $ 0.00 </h5>
+                                    <h5 className='mb-1'>{formatCurrency(user.user_balance)} </h5>
                                     <p className='mb-0' style={{ fontWeight:300 }}> Lifetime earnings </p>
                                 </div>
                             </div>
                             <div className='rentals  ps-3 pe-2'>
                                  <h5 className='mb-0'> Rentals </h5>
-                                   0
+                                   {
+                                       data && data.length
+                                   }
                             </div>
                             <div className='rentals  ps-3 pe-2'>
                                  <h5 className='mb-0'> Request </h5>
-                                   0
+                                   {orders && orders.length}
                             </div>
                             <div className='rentals  ps-3 pe-2'>
                                  <h5 className='mb-0'> Enquiries </h5>
@@ -40,7 +47,7 @@ const MyStarts = () => {
                                    N/A
                             </div>
                         </div>
-                        <div className='reports mt-3 mt-md-2'>
+                        {/* <div className='reports mt-3 mt-md-2'>
                              <h5 className='mb-1'>
                                    Reports 
                                    <button className='btn btn-success py-1 ms-3'>
@@ -95,7 +102,7 @@ const MyStarts = () => {
                                   Note: Calculations for Superlender and Experienced Lender
                                    Status are based on the past 3 completed months.
                              </p>
-                        </div>
+                        </div> */}
                     </div>                           
                 </div>
             </div>

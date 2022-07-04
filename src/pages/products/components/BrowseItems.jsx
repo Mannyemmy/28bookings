@@ -36,11 +36,12 @@ const handleNavigateToRentalPage = (slug) => {
                                  <div className='d-block mx-auto'>
                                  <img src={`${item.imagesCdnUrl}nth/${0}/` } alt={ item.title } className='w-100' />
                                  <p className="d-flex justify-content-between px-1 mt-1 mb-1">  
-                                     <span> { item.created_by.first_name } </span>
+                                     <span> {item.created_by.first_name} {item.created_by.last_name}</span>
+                                     <span className="tw-text-green-400 font-semibold">{ item.city.toUpperCase()}</span>
                                      {/* <span> <i className="fas fa-star"></i> { item.stars }</span> */}
                                  </p>
-                                 <h6 className='mb-0'> { item.title } </h6>
-                                  <p className='price p-0 pt-1 mb-1'>₦{ item.daily_price }/day</p>
+                                 <h6 className='mb-0 px-1'> { item.title } </h6>
+                                  <p className='price p-0 pt-1 mb-1 px-1'>₦{ item.daily_price }/day</p>
                                  </div>
                             </div>
                         )

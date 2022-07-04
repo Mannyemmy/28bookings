@@ -84,6 +84,7 @@ const CreateItemForm = () => {
     imagesCdnUrl: "",
     imagesCount: 0,
     user: user.id,
+    min_rental_days : 1
   });
 
   const handleInputChange = (event) => {
@@ -99,7 +100,7 @@ const CreateItemForm = () => {
       ...createItemForm,
       [event.target.name]: event.target.value,
     });
-    console.log(createItemForm);
+
   };
 
   const handlePriceChange = (event) => {
@@ -133,12 +134,12 @@ const CreateItemForm = () => {
       ...createItemForm,
       description : text
     })
-    console.log(createItemForm)
   }
  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     //send input data to the server using javascript form data api.
     // const formData = new FormData(
     //   document.querySelector("form.create-item-form")
@@ -339,21 +340,20 @@ const CreateItemForm = () => {
           <input
             type="number"
             min={1}
-            disabled
-            name="minimumRentalValue"
-            id="minimum-rentals"
+            name="min_rental_days"
+            id="min_rental_days"
             className="form-control py-md-1  w-25 ms-2"
-            maxLength={40}
-            placeholder="add value.."
-            value={1}
+            placeholder="Minimum days required for renting"
+            onChange={handleInputChange}
+            value={createItemForm.min_rental_days}
           />
         </div>
       </div>
       <div className="border-top mt-3">
-        <p className="error-messege text-danger mt-2">
-          {" "}
-          {/* {createItemForm.errorMessege}{" "} */}
-        </p>
+        {/* <p className="error-messege text-danger mt-2">
+       
+          {createItemForm.errorMessage}
+        </p> */}
         <div className="d-flex add-item-wrapper justify-content-end mb-4 pt-2">
           <div>
             <button

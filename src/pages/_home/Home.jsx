@@ -83,7 +83,7 @@ const Home = () => {
             rent them for a fraction of the price?
           </p>
           <p>More money for you. Less waste for the planet.</p>
-          <Link to={"/search/sewing-machine"} className="btn btn-success py-1">
+          <Link to={"/search/camera"} className="btn btn-success py-1">
             {" "}
             Start Borrowing{" "}
           </Link>

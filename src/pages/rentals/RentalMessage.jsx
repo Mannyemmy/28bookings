@@ -58,7 +58,8 @@ const RentalMessage = () => {
 
   // you can call this function anything
   const onSuccess = (reference) => {
-    paymentSuccess({ rental_id: message.id, patch: reference });
+    console.log({'reference' : reference.reference.toString(), 'user_id' : lendee.id, 'amount' : parseInt(message.cost)} );
+    paymentSuccess({ rental_id: message.id,'reference' : reference.reference.toString(), 'user_id' : lendee.id, 'amount' : parseInt(message.cost) });
     history.push("/rentals");
 
     // Implementation for whatever you want to do with reference and after success call.
@@ -158,7 +159,7 @@ const RentalMessage = () => {
           <div className="tw-grid tw-grid-cols-1  tw-my-2 tw-gap-2 md:tw-mx-auto md:tw-w-80">
             {/* <button
                 type="button"
-                class="btn btn-danger btn-block"
+                className="btn btn-danger btn-block"
                 // onClick={hande}
                 // add code to complaint form page
               >
@@ -166,7 +167,7 @@ const RentalMessage = () => {
               </button> */}
             <button
               type="button"
-              class="btn btn-success btn-block"
+              className="btn btn-success btn-block"
               onClick={handleAccept}
             >
               Received
@@ -200,9 +201,9 @@ const RentalMessage = () => {
               <p className="tw-text-xl tw-font-semibold">
                 Please proceed to make payment with your card
               </p>
-              <div class="d-flex justify-content-center container">
-                <div class="card px-3 bg-white">
-                  <div class="about-product text-center">
+              <div className="d-flex justify-content-center container">
+                <div className="card px-3 bg-white">
+                  <div className="about-product text-center">
                     <img
                       className="tw-w-28 tw-h-28 tw-object-contain"
                       src={`${message?.item.imagesCdnUrl}nth/${0}/`}
@@ -210,18 +211,18 @@ const RentalMessage = () => {
                     />
                     <div>
                       <h4>{message.item.title}</h4>
-                      <h6 class="mt-0 text-black-50">
+                      <h6 className="mt-0 text-black-50">
                         duration : {message.duration} days
                       </h6>
                     </div>
                   </div>
-                  <div class="d-flex justify-content-between total font-weight-bold mt-1">
+                  <div className="d-flex justify-content-between total font-weight-bold mt-1">
                     <span>Total</span>
                     <span>₦{message.cost}.00</span>
                   </div>
-                  <div class="d-grid gap-2 col-12 mx-auto my-1">
+                  <div className="d-grid gap-2 col-12 mx-auto my-1">
                     <button
-                      class="btn btn-primary"
+                      className="btn btn-primary"
                       type="button"
                       onClick={() => {
                         initializePayment(onSuccess, onClose);
@@ -230,7 +231,7 @@ const RentalMessage = () => {
                       Pay Now
                     </button>
                     <button
-                      class="btn btn-danger"
+                      className="btn btn-danger"
                       type="button"
                       onClick={cancelBooking}
                     >

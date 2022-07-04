@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../../features/slices/authSlice";
 import { signout } from "../../../services/authServices";
 import Placeholder from "../../../assets/user_picture_placeholder.png"
+import { url } from "../../../helper";
 
 const LoggedUserDropdown = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const LoggedUserDropdown = () => {
           data-bs-toggle="dropdown"
         >
           <img
-            src={user.profile.picture ? user.profile.picture : Placeholder}
+            src={`${url}${user.profile[0].picture}` || Placeholder}
             alt={`${user.first_name}'s profile`}
             className="me-1"
           />

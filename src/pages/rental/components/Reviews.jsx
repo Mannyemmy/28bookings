@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Reviews = () => {
+const Reviews = ({user}) => {
 
   const [ reviews ] = React.useState([
       {   
@@ -36,7 +36,7 @@ const Reviews = () => {
 
   return (
     <div className='reviews px-1 px-md-4 mt-3'>
-        <h5>  Antonio's reviews </h5>
+        <h5>  {user.first_name}'s reviews </h5>
         <div className="d-flex justify-content-center flex-wrap w-100">
              {
                reviews.map( review => {
@@ -64,7 +64,7 @@ const Reviews = () => {
                })
              }             
         </div>
-        <Link to='/profile/antonio' className='btn d-block mx-auto mt-1 mb-2 py-1'> See all reviews </Link>
+        <Link to={`/profile/${user.id}`} className='btn d-block mx-auto mt-1 mb-2 py-1'> See all reviews </Link>
     </div>
   )
 }

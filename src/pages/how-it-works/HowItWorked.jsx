@@ -100,7 +100,7 @@ const HowItWorked = () => {
                         making better use of resources and helping to protect 
                         this wonderful planet we live on.
                      </p>
-                     <Link to={'/products/sewing-machine'}
+                     <Link to={'/'}
                         className='btn btn-success rounded-lg py-2 py-md-1'> Browse Items  </Link>
                   </div>
             </div>

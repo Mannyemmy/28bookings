@@ -3,7 +3,7 @@ import axios from "axios";
 
 const instance = axios.create({
     // .. where we make our configurations
-        baseURL: "https://pure-anchorage-21759.herokuapp.com/api/",
+        baseURL: `${process.env.REACT_APP_BASE_URL}/api/`,
     });
 
 

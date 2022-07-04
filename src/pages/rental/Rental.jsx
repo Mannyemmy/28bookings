@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import Navbar from "../../components/_navbar/Navbar";
 import { Link } from "react-router-dom";
 import DateModal from "./components/Dates";
@@ -13,17 +13,35 @@ import ExploreOtherOptions from "./components/ExploreOtherOptions";
 import WhyRentWithUs from "./components/WhyRentWithUs";
 import { useParams } from "react-router-dom";
 import { useGetItemBySlugQuery } from "../../services/itemsApi";
+import {useGetUserQuery, usersApi} from "../../services/usersApi"
 import RentalLoader from "./components/RentalLoader";
 import { createRental } from "../../services/rentalServices";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import {url} from "../../helper"
 
 const Rental = () => {
   const history = useHistory()
   let { slug } = useParams();
   const { data, error, isLoading, isFetching, isSuccess } =
     useGetItemBySlugQuery(slug);
+
+    const [trigger,
+      {
+        data : owner
+      }
+   
+] = usersApi.endpoints.getUser.useLazyQuery();
+
+
+useEffect(() => {
+  isSuccess && trigger(data?.user.id)
+},[isSuccess])
+
+  
+
+  
   const user = useSelector((state) => state.auth.user);
   const [alert, setAlert] = useState(null);
   React.useEffect(() =>
@@ -153,33 +171,35 @@ const Rental = () => {
             description={data.item.description}
             path={data.category_path}
           />
-          <div className="px-1 px-md-3">
+          {
+            isSuccess ? owner && (<>
+             <div className="px-1 px-md-3">
             <div className="item-owned mt-2">
-              <h5> Item owned by {data.user.first_name} </h5>
+              <h5> Item owned by {owner.first_name} </h5>
               <div className="d-flex ms-2 mx-2 mx-md-0">
                 <img
-                  src={require("../../assets/anthony.jpg")}
-                  alt="user profile"
+                  src={`${url}${owner.profile[0].picture}`}
+                  alt={owner.first_name}
                 />
                 <div className="ms-4">
-                  <p>
+                  {/* <p>
                     5.0 <i className="fas fa-star"></i> (3189)
                     <button className="btn btn-success bi bi-star ms-3">
                       &nbsp;super lender
                     </button>
-                  </p>
-                  {data.user.bio}
-                  <span> Typically replies within a few minutes </span>
+                  </p> */}
+                  <p className="!tw-text-sm font-medium">{owner.profile[0].bio}</p>
+                  <span className="tw-text-xs"> Typically replies within a few minutes </span>
                   <div className="btn-wrapper mt-2">
                     <Link
                       to={`/chat?userId=${data?.item.user}`}
                       className="btn me-2 py-1"
                     >
                       {" "}
-                      Message {data.user.first_name}{" "}
+                      Message {owner.first_name}{" "}
                     </Link>
                     <Link
-                      to={`/profile/${data?.item.user}`}
+                      to={`/user/${data?.item.user}`}
                       className="btn py-1"
                     >
                       {" "}
@@ -190,8 +210,12 @@ const Rental = () => {
               </div>
             </div>
           </div>
-          <OtherItems user_items={data?.user_items} user_id={data?.user.id} />
-          <Reviews />
+          <OtherItems user_items={data?.user_items} user={data?.user} />
+            
+            </>) : null
+          }
+         
+          {/* <Reviews user={data?.user}/> */}
           <MoreItems />
         
           <WhyRentWithUs />

@@ -1,4 +1,4 @@
-import React, { useContext, createContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -25,15 +25,21 @@ import Message from "./pages/orders/Message";
 import RentalMessage from "./pages/rentals/RentalMessage";
 import Chat from "./pages/chat/Chat";
 import Inbox from "./pages/inbox/Inbox";
+import Admin from "./pages/admin/Admin";
+import SingleProfile from "./pages/userProfile/UserProfile";
+import {useGetSettingsQuery} from "./services/AdminApi";
 
 const App = () => {
   let location = useLocation();
-  console.log(location);
+
+  const {data, isLoading, isSuccess} = useGetSettingsQuery({
+    refetchOnMountOrArgChange: true, refetchOnFocus : true});
 
   return (
     <>
       <Switch>
         <Route path={"/"} component={Home} exact />
+        <Route path={"/admin"} component={Admin} />
         <Route path={"/how-it-worked"} component={HowItWorked} />
         <Route path={"/inbox"} component={Inbox} />
         <Route path={"/chat"} children={<Chat />} />
@@ -42,6 +48,7 @@ const App = () => {
         <Route path={"/favorites"} component={Favorite} />
         <Route path={"/rentals"} component={Rentals} />
         <Route path={"/profile"} component={Profile} />
+        <Route path={"/user/:id"} children={<SingleProfile/>} />
         <Route path={"/edit-profile"} component={EditProfile} />
         <Route path={"/create-item"} component={CreateItem} />
         <Route path={"/enterprise"} component={Business} />
@@ -52,7 +59,9 @@ const App = () => {
         <Route path={"/rental-inbox/:id"} children={<RentalMessage />} />
       </Switch>
 
-      {location.pathname !== "/chat" && location.pathname !== "/inbox" ? (
+      {location.pathname !== "/chat" &&
+      location.pathname !== "/inbox" &&
+      location.pathname !== "/admin" ? (
         <Footer />
       ) : null}
     </>

@@ -7,6 +7,7 @@ import { itemsApi } from "../services/itemsApi.jsx";
 import {usersApi } from "../services/usersApi"
 import {messagesApi} from "../services/messagesApi"
 import {chatsApi } from "../services/chatsApi"
+import {adminApi} from "../services/AdminApi"
 import authSlice from "./slices/authSlice.js";
 
 export default configureStore({
@@ -16,13 +17,14 @@ export default configureStore({
     [usersApi.reducerPath]: usersApi.reducer,
     [messagesApi.reducerPath] : messagesApi.reducer,
     [chatsApi.reducerPath] : chatsApi.reducer,
+    [adminApi.reducerPath] : adminApi.reducer,
     login: loginSlice,
     categories: categoriesSlice,
     reviews: reviewsSlice,
     auth: authSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
-      categoriesApi.middleware, itemsApi.middleware, usersApi.middleware, messagesApi.middleware, chatsApi.middleware
+      categoriesApi.middleware, itemsApi.middleware, usersApi.middleware, messagesApi.middleware, chatsApi.middleware, adminApi.middleware
   ),
   devTools: true,
 });
