@@ -20,7 +20,7 @@ import { isMobile } from "react-device-detect";
 
 import { useDispatch, useSelector } from "react-redux";
 
-let wsUrl =  `${process.env.REACT_APP_BASE_CHAT_URL}/ws/`
+let wsUrl =  `wss://api.28bookings.com/ws/`
 
 function useQuery() {
   const { search } = useLocation();

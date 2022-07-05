@@ -4,7 +4,7 @@ export const messagesApi = createApi({
   reducerPath: "messages",
   tagTypes: ['Messages', 'rentalMessages'],
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_BASE_URL}/api/`,
+    baseUrl: `https://api.28bookings.com/api/`,
     prepareHeaders: (headers, { getState }) => {
       const token =
         JSON.parse(localStorage.getItem("token")) || getState().auth.token;

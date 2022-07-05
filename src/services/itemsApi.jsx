@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const itemsApi = createApi({
     reducerPath: 'items',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_BASE_URL}/api/`,
+    baseUrl: `https://api.28bookings.com/api/`,
     prepareHeaders: (headers, { getState }) => {
       const token = JSON.parse(localStorage.getItem("token")) || getState().auth.token 
   

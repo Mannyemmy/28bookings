@@ -1,4 +1,4 @@
-export const url = process.env.REACT_APP_BASE_IMAGE_URL;
+export const url ="https://api.28bookings.com/static/users";
 
 export const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };

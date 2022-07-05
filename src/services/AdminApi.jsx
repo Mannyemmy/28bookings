@@ -4,7 +4,7 @@ import {setSettings} from "../features/slices/authSlice";
 export const adminApi = createApi({
   reducerPath: "admin",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_BASE_URL}/api/`
+    baseUrl: `https://api.28bookings.com/api/`
   }),
   endpoints: (builder) => ({
     getContacts: builder.query({

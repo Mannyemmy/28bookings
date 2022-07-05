@@ -23,7 +23,7 @@ function useQuery() {
 }
 
 // wss://pure-anchorage-21759.herokuapp.com
-let wsUrl = `${process.env.REACT_APP_BASE_CHAT_URL}/ws/`
+let wsUrl = `wss://api.28bookings.com/ws/`
 
 const ChatUi = (props) => {
   const dispatch = useDispatch();
