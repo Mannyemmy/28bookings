@@ -12,6 +12,9 @@ export const formatCurrency = (amount) => {
   }).format(amount);
 };
 
+export const DecimalFormat = (amount) => {
+  console.log("knight");
+}
 
 export const  check_status = (status) => {
   switch (status) {
