@@ -1,10 +1,14 @@
 import React, { useRef, useEffect } from "react";
 import { formatCurrency } from "../../../helper";
-import { Link } from "react-router-dom";
+import { Link , useHistory} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useRequestWithdrawMutation } from "../../../services/usersApi";
 
+
 const Withdraw = ({ user }) => {
+
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
@@ -28,14 +32,20 @@ const Withdraw = ({ user }) => {
     }
 
     withdraw(data);
+
+
   };
 
-  
+  const edit = (event)=>{
+    event.preventDefault();
+    closeRef.current.click();
+    history.push("/edit-profile")
+  }
 
   useEffect(() => {
-    isSuccess && closeRef.current.click()
-    isSuccess && alert("request will be processed in the next 24hrs")
-  },[isSuccess])
+    isSuccess && closeRef.current.click();
+    isSuccess && alert("request will be processed in the next 24hrs");
+  }, [isSuccess]);
 
   return (
     <>
@@ -63,9 +73,11 @@ const Withdraw = ({ user }) => {
             </div>
             <div className="modal-body">
               {user.bank == "" && user.account_number == "" ? (
-                <Link to={"/edit-profile"} className="!tw-text-sm ms-1">
-                  Add Bank Details
-                </Link>
+            
+                  <button className="btn btn-success !tw-text-sm ms-1" onClick={(event)=>edit(event)}>
+                    Add Bank Details
+                  </button>
+           
               ) : (
                 <form
                   className="w-100 m-0 p-0 edit-form"
