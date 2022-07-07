@@ -43,6 +43,7 @@ const ChatUi = (props) => {
   });
 
   const getChatId = (to, from) => {
+    console.log(to, from)
     if (to < from) {
       return `${to.toString()}:${from.toString()}`;
     } else {
@@ -72,7 +73,7 @@ const ChatUi = (props) => {
   }, []);
 
   useEffect(() => {
-    isGetUsersSuccess &&
+    isGetUsersSuccess && chatUsers.length > 0 &&
       setMessage({
         ...message,
         from_user_id: parseInt(clientId),
@@ -83,7 +84,7 @@ const ChatUi = (props) => {
           )
         ),
       });
-    isGetUsersSuccess &&
+    isGetUsersSuccess && chatUsers.length > 0 &&
       setSocketUrl(
         wsUrl +
           getChatId(
@@ -94,7 +95,7 @@ const ChatUi = (props) => {
             )
           )
       );
-    isGetUsersSuccess &&
+    isGetUsersSuccess  && chatUsers.length > 0 &&
       getMessages({
         from_user_id: clientId,
         to_user_id: checkClientId(
@@ -229,9 +230,9 @@ const ChatUi = (props) => {
                   changeUser={changeUser}
                 />
               ) : (
-                <a className="tw-flex tw-items-center tw-px-3 tw-py-2 tw-text-sm tw-transition tw-duration-150 tw-ease-in-out tw-border-b tw-border-gray-300 tw-cursor-pointer hover:tw-bg-gray-100 focus:tw-outline-none">
+                <div className="tw-flex tw-items-center tw-px-3 tw-py-2 tw-text-sm tw-transition tw-duration-150 tw-ease-in-out tw-border-b tw-border-gray-300 tw-cursor-pointer hover:tw-bg-gray-100 focus:tw-outline-none">
                   <h6>No user found</h6>
-                </a>
+                </div>
               )}
             </li>
           </ul>
