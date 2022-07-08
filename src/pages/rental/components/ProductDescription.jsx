@@ -15,7 +15,7 @@ const ProductDescription = ({ description, path }) => {
  
   
   return (
-    <div className="product-description px-1 px-md-3">
+    <div className="product-description px-1 px-md-2 md:!tw-pl-5">
       <div className="description">
         <h5> Description </h5>
         <p>{paths.join(' | ')}</p>

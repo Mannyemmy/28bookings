@@ -160,7 +160,9 @@ const EditProfileForm = ({ user }) => {
         <div className="d-flex update-data justify-content-end mb-4 border-top pt-2">
           <div>
             <button className="btn btn-success px-3 me-2" type="submit">
-              Save
+             {
+               isLoading ? "Loading..." : "Save"
+             }
             </button>
             <Link to="/profile" className="btn ">
               {" "}

@@ -27,6 +27,8 @@ import Chat from "./pages/chat/Chat";
 import Inbox from "./pages/inbox/Inbox";
 import Admin from "./pages/admin/Admin";
 import SingleProfile from "./pages/userProfile/UserProfile";
+import MyItems from "./pages/my-items";
+import EditItem from "./pages/edit-item";
 import {useGetSettingsQuery} from "./services/AdminApi";
 
 const App = () => {
@@ -42,6 +44,8 @@ const App = () => {
         <Route path={"/admin"} component={Admin} />
         <Route path={"/how-it-worked"} component={HowItWorked} />
         <Route path={"/inbox"} component={Inbox} />
+        <Route path={"/my-items"} component={MyItems} />
+        <Route path={"/edit-item/:slug"} children={<EditItem/>} />
         <Route path={"/chat"} children={<Chat />} />
         <Route path={"/list-an-item"} component={ListAnItem} />
         <Route path={"/my-orders"} component={Orders} />

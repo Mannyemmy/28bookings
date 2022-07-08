@@ -184,7 +184,7 @@ const Message = () => {
         <div className="tw-min-h-[90vh] tw-max-w-5xl tw-mx-auto tw-px-8 tw-py-2 ">
           <div className="tw-flex tw-flex-col tw-items-center tw-justify-center">
             <h1 className="tw-text-center !tw-text-xl !tw-font-semibold">
-              PAYMENT CONFIRMED FROM LENDEE
+              AWAITING PICKUP
             </h1>
             <p>
               Please proceed to drop-off item to the lendee, carry along a valid

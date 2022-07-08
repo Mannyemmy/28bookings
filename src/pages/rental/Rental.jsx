@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/_navbar/Navbar";
 import { Link } from "react-router-dom";
 import DateModal from "./components/Dates";
@@ -13,35 +13,28 @@ import ExploreOtherOptions from "./components/ExploreOtherOptions";
 import WhyRentWithUs from "./components/WhyRentWithUs";
 import { useParams } from "react-router-dom";
 import { useGetItemBySlugQuery } from "../../services/itemsApi";
-import {useGetUserQuery, usersApi} from "../../services/usersApi"
+import { useGetUserQuery, usersApi } from "../../services/usersApi";
 import RentalLoader from "./components/RentalLoader";
 import { createRental } from "../../services/rentalServices";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {url} from "../../helper"
+import { url } from "../../helper";
 
 const Rental = () => {
-  const history = useHistory()
+  const history = useHistory();
   let { slug } = useParams();
+  const stateUserId = useSelector(state => state.auth.id)
+  const [user_id, setUserId] = useState(localStorage.getItem("id") || stateUserId);
   const { data, error, isLoading, isFetching, isSuccess } =
     useGetItemBySlugQuery(slug);
 
-    const [trigger,
-      {
-        data : owner
-      }
-   
-] = usersApi.endpoints.getUser.useLazyQuery();
+  const [trigger, { data: owner , isSuccess : isGot}] = usersApi.endpoints.getUser.useLazyQuery();
 
+  useEffect(() => {
+    isSuccess && trigger(data?.user.id);
+  }, [isSuccess]);
 
-useEffect(() => {
-  isSuccess && trigger(data?.user.id)
-},[isSuccess])
-
-  
-
-  
   const user = useSelector((state) => state.auth.user);
   const [alert, setAlert] = useState(null);
   React.useEffect(() =>
@@ -62,41 +55,39 @@ useEffect(() => {
       price: `₦${data?.item.monthly_price}/month`,
     },
   ];
-  const handleInbox = ()=>{
-    history.push('/rentals')
-  }
+  const handleInbox = () => {
+    history.push("/rentals");
+  };
   const childToParent = async (dateData) => {
-    console.log(dateData)
+    console.log(dateData);
     try {
       const response = await createRental({
-      duration: dateData.duration,
-      from_date: dateData.startDate,
-      to_date: dateData.endDate,
-      cost: dateData.amount,
-      body: "i would like to lend your item",
-      subject: "lend request",
-      user_id: data.user.id,
-      lendee_id: user.id,
-      item_id: data.item.id,
-    });
-    if (response.data === 'success') {
-      setAlert(
-        <SweetAlert
-        style={{ width: "16em", fontSize: "1em !important" }}
-          success
-          title="Booking status sent successfully!"
-          onConfirm={handleInbox}
-          onCancel={handleInbox}
-        >
-         Please wait for owners response in your inbox
-        </SweetAlert>
-      );
-    }
+        duration: dateData.duration,
+        from_date: dateData.startDate,
+        to_date: dateData.endDate,
+        cost: dateData.amount,
+        body: "i would like to lend your item",
+        subject: "lend request",
+        user_id: data.user.id,
+        lendee_id: user.id,
+        item_id: data.item.id,
+      });
+      if (response.data === "success") {
+        setAlert(
+          <SweetAlert
+            style={{ width: "16em", fontSize: "1em !important" }}
+            success
+            title="Booking status sent successfully!"
+            onConfirm={handleInbox}
+            onCancel={handleInbox}
+          >
+            Please wait for owners response in your inbox
+          </SweetAlert>
+        );
+      }
     } catch (error) {
       console.log(error.message);
     }
-    
-    
   };
 
   return (
@@ -152,13 +143,27 @@ useEffect(() => {
                   );
                 })}
               </div>
-              <button
-                data-bs-toggle="modal"
-                data-bs-target="#dateModal"
-                className="btn btn-success mt-4 d-block mx-auto mb-3"
-              >
-                Check price and avaibility
-              </button>
+              <>
+              { user_id == data.user.id ? (
+                <Link to={`/edit-item/${data.item.slug}`}>
+                  <button
+                  className="btn btn-success mt-4 d-block mx-auto mb-3"
+                >
+                  Edit Item
+                </button>
+                </Link>
+              
+              ) : (
+                <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#dateModal"
+                  className="btn btn-success mt-4 d-block mx-auto mb-3"
+                >
+                  Check price and avaibility
+                </button>
+              )}
+              </>
+              
             </div>
             <DateModal
               id="dateModal"
@@ -171,53 +176,59 @@ useEffect(() => {
             description={data.item.description}
             path={data.category_path}
           />
-          {
-            isSuccess ? owner && (<>
-             <div className="px-1 px-md-3">
-            <div className="item-owned mt-2">
-              <h5> Item owned by {owner.first_name} </h5>
-              <div className="d-flex ms-2 mx-2 mx-md-0">
-                <img
-                  src={`${url}${owner.profile[0].picture}`}
-                  alt={owner.first_name}
-                />
-                <div className="ms-4">
-                  {/* <p>
+          {isGot
+            ? owner.id != user_id && (
+                <>
+                  <div className="px-1 px-md-3">
+                    <div className="item-owned mt-2">
+                      <h5> Item owned by {owner.first_name} </h5>
+                      <div className="d-flex ms-2 mx-2 mx-md-0">
+                        <img
+                          src={`${url}${owner.profile[0].picture}`}
+                          alt={owner.first_name}
+                        />
+                        <div className="ms-4">
+                          {/* <p>
                     5.0 <i className="fas fa-star"></i> (3189)
                     <button className="btn btn-success bi bi-star ms-3">
                       &nbsp;super lender
                     </button>
                   </p> */}
-                  <p className="!tw-text-sm font-medium">{owner.profile[0].bio}</p>
-                  <span className="tw-text-xs"> Typically replies within a few minutes </span>
-                  <div className="btn-wrapper mt-2">
-                    <Link
-                      to={`/chat?userId=${data?.item.user}`}
-                      className="btn me-2 py-1"
-                    >
-                      {" "}
-                      Message {owner.first_name}{" "}
-                    </Link>
-                    <Link
-                      to={`/user/${data?.item.user}`}
-                      className="btn py-1"
-                    >
-                      {" "}
-                      See {data.user.first_name} profile{" "}
-                    </Link>
+                          <p className="!tw-text-sm font-medium">
+                            {owner.profile[0].bio}
+                          </p>
+                          <span className="tw-text-xs">
+                            {" "}
+                            Typically replies within a few minutes{" "}
+                          </span>
+                          <div className="btn-wrapper mt-2">
+                            <Link
+                              to={`/chat?userId=${data?.item.user}`}
+                              className="btn me-2 py-1"
+                            >
+                              {" "}
+                              Message {owner.first_name}{" "}
+                            </Link>
+                            <Link
+                              to={`/user/${data?.item.user}`}
+                              className="btn py-1"
+                            >
+                              {" "}
+                              See {data.user.first_name} profile{" "}
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <OtherItems user_items={data?.user_items} user={data?.user} />
-            
-            </>) : null
-          }
-         
+                  <OtherItems user_items={data?.user_items} user={data?.user} />
+                </>
+              )
+            : null}
+
           {/* <Reviews user={data?.user}/> */}
           <MoreItems />
-        
+
           <WhyRentWithUs />
         </div>
       )}

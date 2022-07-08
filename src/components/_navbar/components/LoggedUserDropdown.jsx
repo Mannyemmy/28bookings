@@ -43,7 +43,7 @@ const LoggedUserDropdown = () => {
           <li>
             <Link className="dropdown-item ps-2" to="/my-orders">
               {" "}
-              Orders{" "}
+              My Order{" "}
             </Link>{" "}
           </li>
           <li>
@@ -53,15 +53,15 @@ const LoggedUserDropdown = () => {
             </Link>{" "}
           </li>
           <li>
-            <Link className="dropdown-item ps-2" to="/favorites">
-              {" "}
-              Favorites{" "}
-            </Link>{" "}
-          </li>
-          <li>
             <Link className="dropdown-item ps-2" to="/profile">
               {" "}
               Profile{" "}
+            </Link>{" "}
+          </li>
+          <li>
+            <Link className="dropdown-item ps-2" to="/my-items">
+              {" "}
+              My Items{" "}
             </Link>{" "}
           </li>
           <li>

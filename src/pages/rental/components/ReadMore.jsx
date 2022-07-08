@@ -35,7 +35,7 @@ const ReadMore = (props) => {
 
     return (
         <div className={parentClass}>
-            <div
+            <div 
                 dangerouslySetInnerHTML={{
                     __html: `${
                         !state.showRealData ? state.truncatedData : state.realData
