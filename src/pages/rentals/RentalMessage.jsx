@@ -18,6 +18,8 @@ const RentalMessage = () => {
   const message = location.state || {};
   const [alert, setAlert] = useState(null);
 
+  
+
   const {
     data: lendee,
     error,
@@ -268,7 +270,7 @@ const RentalMessage = () => {
             />
           </div>
           <div className="d-grid gap-2 col-6 tw-mt-2 mx-auto">
-            <button className="btn btn-info tw-text-white" type="button">
+            <button className="btn btn-info tw-text-white" type="button"  onClick={()=>history.push(`/chat?userId=${message.user_id}`)}>
               Chat with lender
             </button>
             <button
