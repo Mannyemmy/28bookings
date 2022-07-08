@@ -57,7 +57,7 @@ const Notifications = ({ messages }) => {
       </div> */}
 
       <div className="inbox-list">
-        <h1>My Orders</h1>
+        <h1 className="!tw-text-sm !tw-ml-1 !md:tw-text-2xl">My Orders</h1>
         {messages.map((message) => (
           <div
             id="message-item"
@@ -78,7 +78,7 @@ const Notifications = ({ messages }) => {
               >
                 {message.notification.status}
               </span>
-              <span className="time">
+              <span className="time !tw-text-xs tw-hidden md:tw-inline-block tw-mx-1">
                 {formatDistanceToNow(parseJSON(message.rental.updated_at))} ago
               </span>
             </header>
@@ -86,6 +86,9 @@ const Notifications = ({ messages }) => {
               <p>
                 {`₦${message.rental.cost} for ${message.rental.duration} days`}
               </p>
+              <span className="time !tw-text-xs md:tw-hidden tw-inline-block">
+                {formatDistanceToNow(parseJSON(message.rental.updated_at))} ago
+              </span>
             </main>
           </div>
         ))}

@@ -6,7 +6,12 @@ import { useGetInboxMessagesQuery } from "../../services/messagesApi";
 
 const Orders = () => {
   const { data, error, isLoading, isFetching, isSuccess } =
-    useGetInboxMessagesQuery({pollingInterval: 3000, refetchOnMountOrArgChange: true,refetchOnFocus : true, refetchOnReconnect : true });
+    useGetInboxMessagesQuery({
+      pollingInterval: 3000,
+      refetchOnMountOrArgChange: true,
+      refetchOnFocus: true,
+      refetchOnReconnect: true,
+    });
 
   React.useEffect(() =>
     window.scrollTo({ top: 0, left: 0, scrollBehaviour: "smooth" })
@@ -24,13 +29,13 @@ const Orders = () => {
           {isLoading ? (
             <div className="d-flex justify-content-center">
               <div className="spinner-grow text-success" role="status">
-                <span className="sr-only">Loading...</span>
+                <span className="sr-only tw-hidden">Loading...</span>
               </div>
             </div>
           ) : (
             <>
               {data?.length > 0 ? (
-                <Notifications  messages = {data}/>
+                <Notifications messages={data} />
               ) : (
                 <div className="wrapper py-3">
                   <img
