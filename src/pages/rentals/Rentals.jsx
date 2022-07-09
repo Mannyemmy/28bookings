@@ -21,7 +21,7 @@ const Rentals = () => {
           {isLoading ? (
             <div className="d-flex justify-content-center">
               <div className="spinner-grow text-success" role="status">
-                <span className="sr-only">Loading...</span>
+                <span className="sr-only tw-hidden">Loading...</span>
               </div>
             </div>
           ) : (

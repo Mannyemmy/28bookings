@@ -38,12 +38,7 @@ export const messagesApi = createApi({
           body: data,
         };
       },
-      // query: (data) => ({
-      //   url: `payment_success/${rental_id}`,
-      //   method: "PATCH",
-      //   body: patch,
-      // }),
-      invalidatesTags: ["rentalMessages"],
+      invalidatesTags: ["rentalMessages", "Messages"],
     }),
     updateIsRead: builder.mutation({
       query: ({ id }) => ({
@@ -60,7 +55,7 @@ export const messagesApi = createApi({
         method: "PATCH",
         body: patch,
       }),
-      invalidatesTags: ["rentalMessages"],
+      invalidatesTags: ["rentalMessages", "Messages"],
     }),
     rejectBooking: builder.mutation({
       query: ({ ...patch }) => ({
@@ -76,7 +71,7 @@ export const messagesApi = createApi({
         method: "PATCH",
         body: patch,
       }),
-      invalidatesTags: ["Messages"],
+      invalidatesTags: ["Messages", "rentalMessages"],
     }),
   }),
 });
