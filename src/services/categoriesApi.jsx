@@ -21,10 +21,14 @@ export const categoriesApi = createApi({
     getCategoryBySlug: builder.query({
       query: (slug) => `category/${slug}`,
     }),
+    getEditCategories: builder.query({
+      query: () => `categories`
+    })
   }),
 });
 
 export const {
+  useGetEditCategoriesQuery,
   useGetCategoriesQuery,
   useGetCategoryQuery,
   useGetItemsByCategoryQuery,

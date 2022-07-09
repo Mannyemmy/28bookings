@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const messagesApi = createApi({
   reducerPath: "messages",
-  tagTypes: ['Messages', 'rentalMessages'],
+  tagTypes: ["Messages", "rentalMessages"],
   baseQuery: fetchBaseQuery({
     baseUrl: `https://api.28bookings.com/api/`,
     prepareHeaders: (headers, { getState }) => {
@@ -20,32 +20,30 @@ export const messagesApi = createApi({
   endpoints: (builder) => ({
     getInboxMessages: builder.query({
       query: () => `inbox/`,
-      providesTags: ['Messages'],
+      providesTags: ["Messages"],
     }),
     getRentalDates: builder.query({
-      query: (id) => `rentals/pending/${id}`
+      query: (id) => `rentals/pending/${id}`,
     }),
     getRentalInboxMessages: builder.query({
       query: () => `rentals/`,
-      providesTags: ['rentalMessages'],
+      providesTags: ["rentalMessages"],
     }),
 
     paymentSuccess: builder.mutation({
-
-
       query(data) {
-      
         return {
           url: `payment_success`,
-          method: 'PATCH',
-          body : data
-        }},
+          method: "PATCH",
+          body: data,
+        };
+      },
       // query: (data) => ({
       //   url: `payment_success/${rental_id}`,
       //   method: "PATCH",
       //   body: patch,
       // }),
-      invalidatesTags: ['rentalMessages'],
+      invalidatesTags: ["rentalMessages"],
     }),
     updateIsRead: builder.mutation({
       query: ({ id }) => ({
@@ -62,7 +60,7 @@ export const messagesApi = createApi({
         method: "PATCH",
         body: patch,
       }),
-      invalidatesTags: ['rentalMessages'],
+      invalidatesTags: ["rentalMessages"],
     }),
     rejectBooking: builder.mutation({
       query: ({ ...patch }) => ({
@@ -70,7 +68,7 @@ export const messagesApi = createApi({
         method: "PATCH",
         body: patch,
       }),
-      invalidatesTags: ['Messages','rentalMessages'],
+      invalidatesTags: ["Messages", "rentalMessages"],
     }),
     acceptBooking: builder.mutation({
       query: ({ ...patch }) => ({
@@ -78,8 +76,8 @@ export const messagesApi = createApi({
         method: "PATCH",
         body: patch,
       }),
+      invalidatesTags: ["Messages"],
     }),
-    invalidatesTags: ['Messages'],
   }),
 });
 
@@ -91,5 +89,5 @@ export const {
   useAcceptBookingMutation,
   useGetRentalInboxMessagesQuery,
   usePaymentSuccessMutation,
-  useDropOffConfirmMutation
+  useDropOffConfirmMutation,
 } = messagesApi;

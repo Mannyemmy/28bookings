@@ -20,16 +20,20 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { url } from "../../helper";
+import TextLoader from "../../components/TextLoader";
 
 const Rental = () => {
   const history = useHistory();
   let { slug } = useParams();
-  const stateUserId = useSelector(state => state.auth.id)
-  const [user_id, setUserId] = useState(localStorage.getItem("id") || stateUserId);
+  const stateUserId = useSelector((state) => state.auth.id);
+  const [user_id, setUserId] = useState(
+    localStorage.getItem("id") || stateUserId
+  );
   const { data, error, isLoading, isFetching, isSuccess } =
     useGetItemBySlugQuery(slug);
 
-  const [trigger, { data: owner , isSuccess : isGot}] = usersApi.endpoints.getUser.useLazyQuery();
+  const [trigger, { data: owner, isSuccess: isGot }] =
+    usersApi.endpoints.getUser.useLazyQuery();
 
   useEffect(() => {
     isSuccess && trigger(data?.user.id);
@@ -94,9 +98,7 @@ const Rental = () => {
     <>
       <Navbar />
       {isFetching ? (
-        <div style={{ width: "100%", marginTop: "10px" }}>
-          <RentalLoader viewBox="0 0 700 360" />
-        </div>
+        <TextLoader />
       ) : (
         <div className="rental-page">
           <div className="row w-100 p-0 m-0 mx-auto mt-2 mt-md-3">
@@ -144,26 +146,22 @@ const Rental = () => {
                 })}
               </div>
               <>
-              { user_id == data.user.id ? (
-                <Link to={`/edit-item/${data.item.slug}`}>
+                {user_id == data.user.id ? (
+                  <Link to={`/edit-item/${data.item.slug}`}>
+                    <button className="btn btn-success mt-4 d-block mx-auto mb-3">
+                      Edit Item
+                    </button>
+                  </Link>
+                ) : (
                   <button
-                  className="btn btn-success mt-4 d-block mx-auto mb-3"
-                >
-                  Edit Item
-                </button>
-                </Link>
-              
-              ) : (
-                <button
-                  data-bs-toggle="modal"
-                  data-bs-target="#dateModal"
-                  className="btn btn-success mt-4 d-block mx-auto mb-3"
-                >
-                  Check price and avaibility
-                </button>
-              )}
+                    data-bs-toggle="modal"
+                    data-bs-target="#dateModal"
+                    className="btn btn-success mt-4 d-block mx-auto mb-3"
+                  >
+                    Check price and avaibility
+                  </button>
+                )}
               </>
-              
             </div>
             <DateModal
               id="dateModal"
