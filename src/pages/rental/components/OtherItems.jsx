@@ -41,7 +41,7 @@ const handleNavigateToRentalPage = (slug) => {
                    <button onClick={ handleNextClick } className='btn btn-success prev-btn bi bi-chevron-right'></button>
                </div>
           </div>
-          <Link to={`/profile/${user.id}`} className='btn d-block mx-auto mt-3 py-1'> See all listings from {user.first_name} </Link>
+          <Link to={`/user/${user.id}`} className='btn d-block mx-auto mt-3 py-1'> See all listings from {user.first_name} </Link>
     </div>
   )
 }

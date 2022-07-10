@@ -9,6 +9,7 @@ import HowItWorks from "./components/HowItWorks";
 import { useGetCategoryBySlugQuery } from "../../services/categoriesApi";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
+import TextLoader from "../../components/TextLoader";
 const Product = () => {
   React.useEffect(() =>
     window.scrollTo({ top: 0, left: 0, scrollBehaviour: "smooth" })
@@ -25,7 +26,7 @@ const Product = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <TextLoader />
       ) : (
         <>
           <Navbar />
