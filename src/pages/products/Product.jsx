@@ -25,11 +25,11 @@ const Product = () => {
 
   return (
     <>
+      <Navbar />
       {isLoading ? (
         <TextLoader />
       ) : (
         <>
-          <Navbar />
           <div className="product-page">
             <Header title={category?.name} />
             <div className="row w-100 m-0 p-0 mx-auto mt-4 save-more">
