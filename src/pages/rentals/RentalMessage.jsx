@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { usePaystackPayment } from "react-paystack";
 import { useLocation, useHistory } from "react-router-dom";
-import { format, parseISO, parseJSON } from "date-fns";
+import { format, formatISO, parseISO, parseJSON } from "date-fns";
 import { useGetUserQuery } from "../../services/usersApi";
 import SweetAlert from "react-bootstrap-sweetalert";
+import { formatCurrency } from "../../helper";
+import Moment from "moment";
 import {
   useRejectBookingMutation,
   usePaymentSuccessMutation,
@@ -12,13 +14,58 @@ import {
 
 import Navbar from "../../components/_navbar/Navbar";
 
+import Countdown from "react-countdown";
+
+// Random component
+const Completionist = () => (
+  <div className="tw-flex tw-flex-col tw-items-center ">
+    <h1 className="tw-text-center tw-uppercase tw-text-2xl tw-font-semibold">
+      Please return item, you will be penalised after the grace period.
+    </h1>
+    <img
+      src="/return.png"
+      className="tw-h-40 tw-w-40 tw-object-cover"
+      alt="return"
+      srcset=""
+    />
+  </div>
+);
+
+// Renderer callback with condition
+const renderer = ({ days, hours, minutes, seconds, completed }) => {
+  if (completed) {
+    // Render a completed state
+    return <Completionist />;
+  } else {
+    // Render a countdown
+    return (
+      <div className="tw-relative">
+        <div id="countdown" className=" ">
+          <div id="tiles">
+            <span>{days}</span>
+            <span>{hours}</span>
+            <span>{minutes}</span>
+            <span>{seconds}</span>"
+          </div>
+          <div className="labels">
+            <li>Days</li>
+            <li>Hours</li>
+            <li>Mins</li>
+            <li>Secs</li>
+          </div>
+        </div>
+      </div>
+    );
+  }
+};
+
 const RentalMessage = () => {
   const location = useLocation();
   let history = useHistory();
   const message = location.state || {};
   const [alert, setAlert] = useState(null);
 
-  
+  console.log(message);
 
   const {
     data: lendee,
@@ -60,8 +107,13 @@ const RentalMessage = () => {
 
   // you can call this function anything
   const onSuccess = (reference) => {
-    console.log({'reference' : reference.reference.toString(), 'user_id' : lendee.id, 'amount' : parseInt(message.cost)} );
-    paymentSuccess({ rental_id: message.id,'reference' : reference.reference.toString(), 'user_id' : lendee.id, 'amount' : parseInt(message.cost) });
+    // console.log({'reference' : reference.reference.toString(), 'user_id' : lendee.id, 'amount' : parseInt(message.cost)} );
+    paymentSuccess({
+      rental_id: message.id,
+      reference: reference.reference.toString(),
+      user_id: lendee.id,
+      amount: parseInt(message.cost),
+    });
     history.push("/rentals");
 
     // Implementation for whatever you want to do with reference and after success call.
@@ -138,7 +190,7 @@ const RentalMessage = () => {
     );
   };
 
-  if (message.rental_confirmed) {
+  if (message.rental_confirmed && message.rental_status !== "picked up") {
     return (
       <>
         <Navbar />
@@ -159,14 +211,6 @@ const RentalMessage = () => {
             />
           </div>
           <div className="tw-grid tw-grid-cols-1  tw-my-2 tw-gap-2 md:tw-mx-auto md:tw-w-80">
-            {/* <button
-                type="button"
-                className="btn btn-danger btn-block"
-                // onClick={hande}
-                // add code to complaint form page
-              >
-                Reject
-              </button> */}
             <button
               type="button"
               className="btn btn-success btn-block"
@@ -175,8 +219,81 @@ const RentalMessage = () => {
               Received
             </button>
           </div>
+          {isSuccess && (
+            <div className="tw-grid tw-grid-cols-1 tw-my-2 tw-gap-2 md:tw-mx-auto md:tw-w-80">
+              <button
+                className="btn btn-info tw-text-white"
+                type="button"
+                onClick={() => history.push(`/chat?userId=${message.user_id}`)}
+              >
+                Chat with lender
+              </button>
+            </div>
+          )}
+          <div className="tw-grid tw-grid-cols-1 tw-my-2 tw-gap-2 md:tw-mx-auto md:tw-w-80">
+            <button
+              className="btn btn-danger tw-text-white"
+              type="button"
+              onClick={() => history.push(`/chat?userId=${11}`)}
+            >
+              Dispute Rental
+            </button>
+          </div>
         </div>
         {alert}
+      </>
+    );
+  }
+
+  if (message.rental_confirmed && message.rental_status === "picked up") {
+    return (
+      <>
+        <Navbar />
+        <h1 className="tw-text-center tw-mt-2 tw-text-2xl tw-font-bold ">
+          RETURN ITEM ON DUE DATE
+        </h1>
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-w-full md:tw-px-20 tw-px-2 tw-py-5">
+          <div className="d-flex justify-content-center container ">
+            <div className="card px-3 bg-white">
+              <div className="about-product text-center">
+                <img
+                  className="tw-w-28 tw-h-28 tw-object-contain"
+                  src={`${message?.item.imagesCdnUrl}nth/${0}/`}
+                  alt=""
+                />
+                <div>
+                  <h4>{message.item.title}</h4>
+                  <h6 className="mt-0 text-black-50">
+                    duration : {message.duration} days
+                  </h6>
+                  <p>
+                    <span className="">{`  From ${Moment(
+                      message.from_date
+                    ).format("MMMM Do YYYY")} To ${Moment(
+                      message.to_date
+                    ).format("MMMM Do YYYY")}`}</span>
+                  </p>
+                </div>
+              </div>
+              <div className="total font-weight-bold ">
+                <span>Total: </span>
+                <span>{formatCurrency(message.cost)}</span>
+              </div>
+            </div>
+          </div>
+         
+          <Countdown date={message.to_date} renderer={renderer} />
+          <div className="tw-grid tw-grid-cols-1 tw-my-2 tw-gap-2 md:tw-mx-auto md:tw-w-80">
+            <button
+              className="btn btn-danger tw-text-white"
+              type="button"
+              onClick={() => history.push(`/chat?userId=${11}`)}
+            >
+              Dispute Rental
+            </button>
+          </div>
+         
+        </div>
       </>
     );
   }
@@ -192,7 +309,7 @@ const RentalMessage = () => {
           {isLoading ? (
             <div className="d-flex justify-content-center">
               <div className="spinner-grow text-success" role="status">
-                <span className="sr-only">Loading...</span>
+                <span className="sr-only tw-hidden">Loading...</span>
               </div>
             </div>
           ) : (
@@ -260,7 +377,7 @@ const RentalMessage = () => {
               AWAITING RESPONSE FROM LENDER
             </h1>
             <p>
-              Please initiate chat to hasten the process and discuss pick-up
+              Please initiate chat to hasten the process and discuss handover
               location
             </p>
             <img
@@ -270,7 +387,11 @@ const RentalMessage = () => {
             />
           </div>
           <div className="d-grid gap-2 col-6 tw-mt-2 mx-auto">
-            <button className="btn btn-info tw-text-white" type="button"  onClick={()=>history.push(`/chat?userId=${message.user_id}`)}>
+            <button
+              className="btn btn-info tw-text-white"
+              type="button"
+              onClick={() => history.push(`/chat?userId=${message.user_id}`)}
+            >
               Chat with lender
             </button>
             <button
@@ -286,22 +407,6 @@ const RentalMessage = () => {
       </>
     );
   }
-
-  // return (
-  //   <div>
-  //     <Navbar />
-
-  //     {/* <button
-  //       onClick={() => {
-  //         initializePayment(onSuccess, onClose);
-  //       }}
-  //     >
-  //       Pay Now
-  //     </button> */}
-
-  //     {alert}
-  //   </div>
-  // );
 };
 
 export default RentalMessage;

@@ -5,6 +5,7 @@ import Navbar from "../../components/_navbar/Navbar";
 import { useGetUserQuery } from "../../services/usersApi";
 import { url } from "../../helper";
 import RentalLoader from "../rental/components/RentalLoader";
+import TextLoader from "../../components/TextLoader"
 
 const Profile = () => {
   React.useEffect(() =>
@@ -19,7 +20,7 @@ const Profile = () => {
     <>
       <Navbar />
       {isLoading ? (
-        <RentalLoader />
+        <TextLoader />
       ) : (
         user && (
           <div className="profile">

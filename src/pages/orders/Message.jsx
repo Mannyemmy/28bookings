@@ -4,11 +4,56 @@ import { useGetUserQuery } from "../../services/usersApi";
 import { useLocation, useHistory } from "react-router-dom";
 import { format, parseISO, parseJSON } from "date-fns";
 import SweetAlert from "react-bootstrap-sweetalert";
+import Moment from "moment";
 import {
   useRejectBookingMutation,
   useAcceptBookingMutation,
-  useDropOffConfirmMutation
+  useDropOffConfirmMutation,
 } from "../../services/messagesApi";
+import Countdown from "react-countdown";
+
+// Random component
+const Completionist = () => (
+  <div className="tw-flex tw-flex-col tw-items-center ">
+    <h1 className="tw-text-center tw-uppercase tw-text-2xl tw-font-semibold">
+      Contact support if item hasn't been returned by the lendee'
+    </h1>
+    <img
+      src="/return.png"
+      className="tw-h-40 tw-w-40 tw-object-cover"
+      alt="return"
+      srcset=""
+    />
+  </div>
+);
+
+// Renderer callback with condition
+const renderer = ({ days, hours, minutes, seconds, completed }) => {
+  if (completed) {
+    // Render a completed state
+    return <Completionist />;
+  } else {
+    // Render a countdown
+    return (
+      <div className="tw-relative tw-max-w-7xl tw-mx-auto">
+        <div id="countdown" className="tw-inset-x-0 ">
+          <div id="tiles">
+            <span>{days}</span>
+            <span>{hours}</span>
+            <span>{minutes}</span>
+            <span>{seconds}</span>"
+          </div>
+          <div className="labels">
+            <li>Days</li>
+            <li>Hours</li>
+            <li>Mins</li>
+            <li>Secs</li>
+          </div>
+        </div>
+      </div>
+    );
+  }
+};
 
 const Message = () => {
   const location = useLocation();
@@ -83,7 +128,7 @@ const Message = () => {
         Once payment has been made you will be notified to drop off item
       </SweetAlert>
     );
-  }
+  };
   const handleAccept = () => {
     setAlert(
       <SweetAlert
@@ -96,10 +141,6 @@ const Message = () => {
         onCancel={() => setAlert(null)}
       />
     );
-
-   
-
-   
   };
 
   const [
@@ -138,8 +179,10 @@ const Message = () => {
     );
   };
 
-  if (message.notification.status === "Picked_up" &&
-  message.rental.rental_confirmed === true) {
+  if (
+    message.notification.status === "Picked_up" &&
+    message.rental.rental_confirmed === true
+  ) {
     return (
       <>
         <Navbar />
@@ -171,13 +214,27 @@ const Message = () => {
               Item Received
             </button>
           </div>
+          <h1 className="tw-text-center tw-font-bold tw-text-2xl">
+            REMAINING RENTAL DAYS
+          </h1>
+
+          <Countdown date={message.rental.to_date} renderer={renderer} />
+          <div className="tw-grid tw-grid-cols-1 tw-my-2 tw-gap-2 md:tw-mx-auto md:tw-w-80">
+            <button
+              className="btn btn-danger tw-text-white"
+              type="button"
+              onClick={() => history.push(`/chat?userId=${11}`)}
+            >
+              Dispute Rental
+            </button>
+          </div>
         </div>
         {alert}
       </>
     );
   }
 
-  if (message.rental.rental_confirmed ) {
+  if (message.rental.rental_confirmed) {
     return (
       <>
         <Navbar />
@@ -192,11 +249,69 @@ const Message = () => {
               offs should be in a public place
             </p>
             <img
-            src="/delivery.png"
-            className="tw-h-28 tw-w-28 tw-object-contain"
-            alt="delivery"
-          />
+              src="/delivery.png"
+              className="tw-h-28 tw-w-28 tw-object-contain"
+              alt="delivery"
+            />
           </div>
+          {isSuccess && (
+            <>
+              <div className="tw-flex tw-flex-col tw-justify-center tw-items-start !tw-space-y-2 tw-mt-1">
+                <p className="tw-mb-0 ">
+                  Ordered By:{" "}
+                  <span>
+                    {lendee.first_name} {lendee.last_name}
+                  </span>
+                </p>
+                <p>
+                  Address: <span>{lendee.location}</span>
+                </p>
+                <p>
+                  Phone Number: <span>{lendee.phone}</span>
+                </p>
+                <p>
+                  Item Name :{" "}
+                  <span className="tw-font-bold tw-text-xl">
+                    {message.rental.item.title}
+                  </span>
+                </p>
+                {/* <p className="tw-font-bold">Description :</p> */}
+                {/* <div
+                dangerouslySetInnerHTML={{
+                  __html: message.rental.item.description,
+                }}
+              /> */}
+                <p>
+                  Rental Duration: <span>{message.rental.duration} days</span>{" "}
+                  <span className="tw-font-semibold">{`  From ${Moment(
+                    message.from_date
+                  ).format("MMMM Do YYYY")} To ${Moment(message.to_date).format(
+                    "MMMM Do YYYY"
+                  )}`}</span>
+                </p>
+              </div>
+              <div className="tw-grid tw-grid-cols-1 tw-my-2 tw-gap-2 md:tw-mx-auto md:tw-w-80">
+                <button
+                  className="btn btn-info tw-text-white"
+                  type="button"
+                  onClick={() =>
+                    history.push(
+                      `/chat?userId=${message.notification.sender_id}`
+                    )
+                  }
+                >
+                  Chat with lendee
+                </button>
+                <button
+                  className="btn btn-danger tw-text-white"
+                  type="button"
+                  onClick={() => history.push(`/chat?userId=${11}`)}
+                >
+                  Dispute Rental
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </>
     );
@@ -275,12 +390,10 @@ const Message = () => {
               />
               <p>
                 Rental Duration: <span>{message.rental.duration} days</span>{" "}
-                <span className="tw-font-semibold">{`  From ${format(
-                  parseJSON(message.rental.from_date),
-                  "io MMMM,yyyy"
-                )} To ${format(
-                  parseJSON(message.rental.to_date),
-                  "io MMMM,yyyy"
+                <span className="tw-font-semibold">{`  From ${Moment(
+                  message.from_date
+                ).format("MMMM Do YYYY")} To ${Moment(message.to_date).format(
+                  "MMMM Do YYYY"
                 )}`}</span>
               </p>
             </div>

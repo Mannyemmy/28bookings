@@ -22,7 +22,6 @@ const handleNavigateToRentalPage = (slug) => {
 
   return (
     <div className="more-items px-1 px-md-3 mt-4 mt-md-2">
-           <h5> People also viewed </h5>
            <div className="d-flex justify-content-between p-0 m-0 mt-3">
                <div className='prev-btn-wrapper h-100 d-flex align-items-center m-hide'>
                     <button onClick={ handlePrevClick } className='btn btn-success prev-btn bi bi-chevron-left'></button>

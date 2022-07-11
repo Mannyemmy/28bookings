@@ -4,6 +4,7 @@ import { formatDistanceToNow, parseISO, parseJSON } from "date-fns";
 import { useHistory } from "react-router-dom";
 import { useUpdateIsReadMutation } from "../../services/messagesApi";
 import { useLocation } from "react-router-dom";
+import RentalCard from "../rentals/RentalCard";
 
 const Notifications = ({ messages }) => {
   const [orders, setOrders] = useState(true);
@@ -58,40 +59,13 @@ const Notifications = ({ messages }) => {
 
       <div className="inbox-list">
         <h1 className="!tw-text-sm !tw-ml-1 !md:tw-text-2xl">My Orders</h1>
-        {messages.map((message) => (
-          <div
-            id="message-item"
-            className={`${message.is_read ? "" : "unread"}`}
-            key={message.id}
-            onClick={() => handleClick(message)}
-          >
-            <header>
-              <div className="sender-info">
-                <span className="subject">{message.rental.item.title}</span>
-
-                {/* <span className="from">{message.notification.subject}</span> */}
-              </div>
-              <span
-                className={`badge rounded-pill ${check_status(
-                  message.notification.status
-                )}  message-badge`}
-              >
-                {message.notification.status}
-              </span>
-              <span className="time !tw-text-xs tw-hidden md:tw-inline-block tw-mx-1">
-                {formatDistanceToNow(parseJSON(message.rental.updated_at))} ago
-              </span>
-            </header>
-            <main>
-              <p>
-                {`₦${message.rental.cost} for ${message.rental.duration} days`}
-              </p>
-              <span className="time !tw-text-xs md:tw-hidden tw-inline-block">
-                {formatDistanceToNow(parseJSON(message.rental.updated_at))} ago
-              </span>
-            </main>
-          </div>
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-2 p-1">
+           {messages.map((message) => (
+          <RentalCard key={message.id} orders={true} onClick={() => handleClick(message)} message={message} />
+         
         ))}
+        </div>
+       
       </div>
     </div>
   );

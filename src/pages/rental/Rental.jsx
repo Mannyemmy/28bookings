@@ -153,13 +153,21 @@ const Rental = () => {
                     </button>
                   </Link>
                 ) : (
-                  <button
-                    data-bs-toggle="modal"
-                    data-bs-target="#dateModal"
-                    className="btn btn-success mt-4 d-block mx-auto mb-3"
-                  >
-                    Check price and avaibility
-                  </button>
+                  <>
+                    {data.item.is_available ? (
+                      <button
+                        data-bs-toggle="modal"
+                        data-bs-target="#dateModal"
+                        className="btn btn-success mt-4 d-block mx-auto mb-3"
+                      >
+                        Check price and avaibility
+                      </button>
+                    ) : (
+                      <button className="btn btn-success mt-4 d-block mx-auto mb-3">
+                        Item is currently unavailable
+                      </button>
+                    )}
+                  </>
                 )}
               </>
             </div>
