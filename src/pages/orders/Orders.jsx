@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment , useEffect} from "react";
 import { Link } from "react-router-dom";
 import Notifications from "../../components/Inbox/Notifications";
 import Navbar from "../../components/_navbar/Navbar";
@@ -13,23 +13,23 @@ const Orders = () => {
       refetchOnReconnect: true,
     });
 
-  React.useEffect(() =>
-    window.scrollTo({ top: 0, left: 0, scrollBehaviour: "smooth" })
-  );
-
+    useEffect(() => {
+      return window.scrollTo({ top: 0, left: 0, scrollBehaviour: "smooth" })
+    },[])
+ 
   return (
     <Fragment>
       <Navbar />
       <div className="inbox">
         <h1 className="border-bottom border-top py-2 ps-2 bi bi-envelope-check">
           {" "}
-          Inbox{" "}
+          Orders{" "}
         </h1>
         <div className="d-flex justify-content-center mt-4 mb-5">
           {isLoading ? (
             <div className="d-flex justify-content-center">
               <div className="spinner-grow text-success" role="status">
-                <span className="sr-only tw-hidden">Loading...</span>
+                <span className="sr-only !tw-hidden">Loading...</span>
               </div>
             </div>
           ) : (
@@ -44,9 +44,9 @@ const Orders = () => {
                     className="d-block mx-auto"
                   />
                   <div className="no-inbox text-center mb-3">
-                    <h5 className="text-center mb-1"> No messages yet </h5>
+                    <h5 className="text-center mb-1"> No Orders yet </h5>
                     <p className="text-center">
-                      This is where you’ll find messages and notifications. As
+                      This is where you’ll find Orders and notifications. As
                       well as arrange pick-ups and drop-offs. Ready to get
                       started?
                     </p>

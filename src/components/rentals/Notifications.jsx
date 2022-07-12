@@ -50,7 +50,7 @@ const Notifications = ({ messages }) => {
     <div className="inbox">
       <div className="inbox-list">
       
-        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-2">
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-y-5 md:tw-gap-y-2 tw-gap-x-2 ">
           {messages.map((message) => (
             <RentalCard key={message.id} onClick={() => handleClick(message)} message={message}/>
             // <div

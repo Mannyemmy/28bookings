@@ -32,7 +32,7 @@ const Product = () => {
         <>
           <div className="product-page">
             <Header title={category?.name} />
-            <div className="row w-100 m-0 p-0 mx-auto mt-4 save-more">
+            {/* <div className="row w-100 m-0 p-0 mx-auto mt-4 save-more">
               <div className="col-12 col-sm-6 col-md-4">
                 <img
                   src={require("../../assets/IMG-20220328-WA0010.jpg")}
@@ -57,7 +57,7 @@ const Product = () => {
                 <h5 className="mb-1"> Dedicated customer support </h5>
                 <p> Incase you are stuck. we are just a call away </p>
               </div>
-            </div>
+            </div> */}
             {isSuccess && (
               <BrowseItems
                 id={category?.id}

@@ -32,7 +32,7 @@ export const itemsApi = createApi({
       query: (query) => `search/${query}`,
     }),
     getUserItems: builder.query({
-      query: (id) => `users/me/items`,
+      query: (id) => `users/me/items/`,
       providesTags: ["UserItems"],
     }),
     editItem: builder.mutation({

@@ -58,8 +58,8 @@ const Notifications = ({ messages }) => {
       </div> */}
 
       <div className="inbox-list">
-        <h1 className="!tw-text-sm !tw-ml-1 !md:tw-text-2xl">My Orders</h1>
-        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-2 p-1">
+        <h1 className="!tw-text-sm !tw-ml-2 !md:tw-text-2xl ">My Orders</h1>
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 md:tw-gap-2 tw-gap-y-5 md:tw-gap-y-2 tw-gap-x-2  p-1">
            {messages.map((message) => (
           <RentalCard key={message.id} orders={true} onClick={() => handleClick(message)} message={message} />
          

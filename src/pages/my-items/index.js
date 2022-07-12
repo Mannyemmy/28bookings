@@ -28,8 +28,9 @@ const MyItems = () => {
           <TextLoader />
         ) : (
           <>
+          <h1 className="tw-text-2xl tw-text-center tw-font-semibold tw-mt-1">My Items</h1>
             {items.length > 0 ? (
-              <div className="!tw-grid !tw-grid-cols-2 md:!tw-grid-cols-4 !tw-gap-2">
+              <div className="!tw-grid !tw-grid-cols-1 md:!tw-grid-cols-3 lg:!tw-grid-cols-4  tw-justify-center tw-items-center tw-place-items-center tw-gap-y-5 md:tw-gap-y-0 tw-mb-5">
                 {items &&
                   items.map((item) => <ItemBox item={item} key={item.id} />)}
               </div>

@@ -43,7 +43,7 @@ const LoggedUserDropdown = () => {
           <li>
             <Link className="dropdown-item ps-2" to="/my-orders">
               {" "}
-              My Order{" "}
+              Orders{" "}
             </Link>{" "}
           </li>
           <li>

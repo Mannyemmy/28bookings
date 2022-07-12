@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/_navbar/Navbar";
 import { useGetRentalInboxMessagesQuery } from "../../services/messagesApi";
 import Notifications from "../../components/rentals/Notifications";
 
 const Rentals = () => {
-  React.useEffect(() =>
-    window.scrollTo({ top: 0, left: 0, scrollBehaviour: "smooth" })
-  );
+  useEffect(() => {
+    return window.scrollTo({ top: 0, left: 0, scrollBehaviour: "smooth" });
+  }, []);
+
   const { data, error, isLoading, isFetching, isSuccess } =
-    useGetRentalInboxMessagesQuery(null,{
+    useGetRentalInboxMessagesQuery(null, {
       pollingInterval: 3000,
       refetchOnFocus: true,
-      refetchOnMountOrArgChange: true
+      refetchOnMountOrArgChange: true,
     });
 
   return (

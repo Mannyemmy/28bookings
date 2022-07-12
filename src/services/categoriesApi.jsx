@@ -16,7 +16,7 @@ export const categoriesApi = createApi({
       query: () => `categories/all`,
     }),
     getItemsByCategory: builder.query({
-      query: (id) => `categories/${id}/items`,
+      query: (id) => `categories/${id}/items/`,
     }),
     getCategoryBySlug: builder.query({
       query: (slug) => `category/${slug}`,

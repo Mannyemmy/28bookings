@@ -117,9 +117,9 @@ const RentalCard = ({ message, onClick, orders }) => {
         <img
           src={`${message.rental.item.imagesCdnUrl}nth/${0}/`}
           alt={message.rental.item.title}
-          className="tw-w-full tw-h-40 tw-object-cover tw-cursor-pointer tw-object-center tw-rounded-lg tw-shadow-md"
+          className="tw-w-full tw-h-auto md:tw-h-40 tw-object-cover tw-cursor-pointer tw-object-center tw-rounded-lg tw-shadow-md"
         />
-        <div className="tw-relative tw-px-2 -tw-mt-16  ">
+        <div className="tw-relative tw-px-2 md:-tw-mt-16 -tw-mt-8  ">
           <div className="tw-bg-white tw-p-2 tw-rounded-lg tw-shadow-lg">
             <div className="tw-flex tw-items-baseline">
               <span
@@ -173,9 +173,9 @@ const RentalCard = ({ message, onClick, orders }) => {
       <img
         src={`${message.item.imagesCdnUrl}nth/${0}/`}
         alt={message.item.title}
-        className="tw-w-full tw-h-40 tw-object-cover tw-cursor-pointer tw-object-center tw-rounded-lg tw-shadow-md"
+        className="tw-w-full tw-h-auto md:tw-h-40 tw-object-contain md:tw-object-cover tw-cursor-pointer tw-object-center tw-rounded-lg tw-shadow-md"
       />
-      <div className="tw-relative tw-px-2 -tw-mt-16  ">
+      <div className="tw-relative tw-px-2 md:-tw-mt-16 -tw-mt-8 ">
         <div className="tw-bg-white tw-p-2 tw-rounded-lg tw-shadow-lg">
           <div className="tw-flex tw-items-baseline">
             {/* <span className="tw-bg-teal-200 tw-text-teal-800 !tw-text-[10px] tw-px-0.5 tw-inline-block tw-rounded-full  tw-uppercase tw-font-semibold tw-tracking-wide">

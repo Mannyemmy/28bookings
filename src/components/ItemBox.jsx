@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import {formatCurrency} from "../helper"
 import { useHistory } from "react-router-dom";
 import Share from "./Share";
 import {
@@ -27,7 +28,7 @@ const ItemBox = ({ item }) => {
 
   return (
     <div
-      className="tw-relative tw-h-[280px] tw-w-[250px]  tw-p-2 !tw-border tw-border-black tw-shadow-md tw-rounded-md tw-flex tw-flex-col tw-space-y-1 tw-justify-center"
+      className="tw-relative tw-h-[280px]  tw-w-[290px] md:tw-w-[250px]  tw-p-2 !tw-border tw-border-black tw-shadow-md tw-rounded-md tw-flex tw-flex-col tw-space-y-1 tw-justify-center"
       key={item.id}
     >
       <div className="tw-absolute tw-top-2 tw-right-1">
@@ -104,7 +105,7 @@ const ItemBox = ({ item }) => {
           alt={item.title}
         />
         <h6 className="tw-text-xl"> {item.title} </h6>
-        <p className="ps-1">₦{item.daily_price} / day </p>
+        <p className="ps-1">{formatCurrency(item.daily_price)} / day </p>
       </div>
       <div className="modal  fade" id={`share${item.id}`}>
         <div className="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">

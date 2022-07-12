@@ -179,10 +179,13 @@ div.product-page{
       div.row{
           div.col-12{
              &>div{
-                width: 94%;                
+                width: 94%;  
+                           
                 img{
-                   height: 220px;
+                   height: 300px;
                    border-radius: 10px;
+                   object-position: center;
+                   object-fit: contain
                 }
                 p{
                    span{
