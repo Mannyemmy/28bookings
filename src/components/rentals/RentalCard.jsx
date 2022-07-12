@@ -55,7 +55,7 @@ const RentalCard = ({ message, onClick, orders }) => {
         return "order rejected";
         break;
       case "approved":
-        return "Order Approved, click to pay";
+        return "Awaiting payment from lendee";
         break;
       case "completed":
         return "Transaction completed ";

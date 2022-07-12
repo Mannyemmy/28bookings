@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/_navbar/Navbar";
 import { useGetUserQuery } from "../../services/usersApi";
 import { useLocation, useHistory } from "react-router-dom";
@@ -10,6 +10,7 @@ import {
   useAcceptBookingMutation,
   useDropOffConfirmMutation,
 } from "../../services/messagesApi";
+import { useCreateDisputeMutation } from "../../services/itemsApi";
 import Countdown from "react-countdown";
 
 // Random component
@@ -70,6 +71,9 @@ const Message = () => {
     acceptBooking, // This is the mutation trigger
     { isLoading: isReturnedAccepted, isSuccess: isReturnSuccess }, // This is the destructured mutation result
   ] = useAcceptBookingMutation();
+
+  const [createDispute, { isLoading: disputing, isSuccess: disputed }] =
+    useCreateDisputeMutation();
 
   const {
     data: lendee,
@@ -179,6 +183,22 @@ const Message = () => {
     );
   };
 
+  const dispute = async () => {
+    var body = {
+      user_id: message.rental.user_id,
+      user_type: "lender",
+      rental_id: message.rental.id,
+      status: "pending",
+      refund: false,
+    };
+
+    createDispute(body);
+  };
+
+  useEffect(() => {
+    disputed && history.push(`/chat?userId=${11}`);
+  }, [disputed]);
+
   if (
     message.notification.status === "Picked_up" &&
     message.rental.rental_confirmed === true
@@ -223,7 +243,7 @@ const Message = () => {
             <button
               className="btn btn-danger tw-text-white"
               type="button"
-              onClick={() => history.push(`/chat?userId=${11}`)}
+              onClick={() => dispute()}
             >
               Dispute Rental
             </button>
@@ -305,7 +325,7 @@ const Message = () => {
                 <button
                   className="btn btn-danger tw-text-white"
                   type="button"
-                  onClick={() => history.push(`/chat?userId=${11}`)}
+                  onClick={() => dispute()}
                 >
                   Dispute Rental
                 </button>

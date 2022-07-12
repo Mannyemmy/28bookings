@@ -55,10 +55,22 @@ export const itemsApi = createApi({
       },
       invalidatesTags: ["UserItems"],
     }),
+    createDispute: builder.mutation({
+      query(body) {
+        return {
+          url: `disputes`,
+          method: "POST",
+          body
+        };
+        
+      },
+    }),
+    
   }),
 });
 
 export const {
+  useCreateDisputeMutation,
   useDeleteItemMutation,
   useEditItemMutation,
   useGetItemBySlugQuery,

@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { usePaystackPayment } from "react-paystack";
-import { useLocation, useHistory } from "react-router-dom";
-import { format, formatISO, parseISO, parseJSON } from "date-fns";
-import { useGetUserQuery } from "../../services/usersApi";
-import SweetAlert from "react-bootstrap-sweetalert";
-import { formatCurrency } from "../../helper";
 import Moment from "moment";
-import {
-  useRejectBookingMutation,
-  usePaymentSuccessMutation,
-  useDropOffConfirmMutation,
-} from "../../services/messagesApi";
-
-import Navbar from "../../components/_navbar/Navbar";
-
+import React, { useEffect, useState } from "react";
+import SweetAlert from "react-bootstrap-sweetalert";
 import Countdown from "react-countdown";
+import { usePaystackPayment } from "react-paystack";
+import { useHistory, useLocation } from "react-router-dom";
+import Navbar from "../../components/_navbar/Navbar";
+import { formatCurrency } from "../../helper";
+import {
+  useDropOffConfirmMutation,
+  usePaymentSuccessMutation,
+  useRejectBookingMutation,
+} from "../../services/messagesApi";
+import { useGetUserQuery } from "../../services/usersApi";
+import { useCreateDisputeMutation } from "../../services/itemsApi";
 
 // Random component
 const Completionist = () => (
@@ -65,7 +63,8 @@ const RentalMessage = () => {
   const message = location.state || {};
   const [alert, setAlert] = useState(null);
 
-  console.log(message);
+  const [createDispute, { isLoading: disputing, isSuccess: disputed }] =
+    useCreateDisputeMutation();
 
   const {
     data: lendee,
@@ -190,6 +189,22 @@ const RentalMessage = () => {
     );
   };
 
+  const dispute = async () => {
+    var body = {
+      user_id: message.lendee_id,
+      user_type: "lendee",
+      rental_id: message.id,
+      status: "pending",
+      refund: false,
+    };
+
+    createDispute(body);
+  };
+
+  useEffect(() => {
+    disputed && history.push(`/chat?userId=${11}`);
+  }, [disputed]);
+
   if (message.rental_confirmed && message.rental_status !== "picked up") {
     return (
       <>
@@ -234,7 +249,7 @@ const RentalMessage = () => {
             <button
               className="btn btn-danger tw-text-white"
               type="button"
-              onClick={() => history.push(`/chat?userId=${11}`)}
+              onClick={() => dispute()}
             >
               Dispute Rental
             </button>
@@ -281,18 +296,17 @@ const RentalMessage = () => {
               </div>
             </div>
           </div>
-         
+
           <Countdown date={message.to_date} renderer={renderer} />
           <div className="tw-grid tw-grid-cols-1 tw-my-2 tw-gap-2 md:tw-mx-auto md:tw-w-80">
             <button
               className="btn btn-danger tw-text-white"
               type="button"
-              onClick={() => history.push(`/chat?userId=${11}`)}
+              onClick={() => dispute()}
             >
               Dispute Rental
             </button>
           </div>
-         
         </div>
       </>
     );
