@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from  'react-router-dom'
 import { Link } from 'react-router-dom'
+import ItemCard from '../../../components/ItemCard'
 
 const OtherItems = ({user_items, user}) => {
 

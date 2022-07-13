@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from  'react-router-dom'
 import { useGetRandomItemQuery } from '../../../services/itemsApi';
+import ItemCard from '../../../components/ItemCard';
 
 const MoreItems = () => {
     const { data : items, error, isLoading, isFetching, isSuccess } = useGetRandomItemQuery();
@@ -30,7 +31,7 @@ const handleNavigateToRentalPage = (slug) => {
                          items?.map( (item) => {
                              return (
                                  <div onClick={ () => handleNavigateToRentalPage( item.slug ) }
-                                  className="me-3 h-100" key={item.id}>
+                                  className="me-1 h-100" key={item.id}>
                                       <img src={`${item.imagesCdnUrl}nth/${0}/` } alt={ item.title } />
                                       <h6 className='mb-1 mt-2'> { item.title } </h6>
                                       <p className='ps-1'>₦{item.daily_price} / day </p>

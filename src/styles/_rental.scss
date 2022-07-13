@@ -186,7 +186,9 @@ div.rental-page{
                     }
                      img{
                          width: 200px;
-                         height: 150px;
+                         height: 170px;
+                         object-fit: contain;
+                         object-position: center;
                      }
                      h6{
                         @include set-font-size(0.7rem, 00.45rem) ;    

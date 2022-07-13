@@ -22,6 +22,10 @@ export const itemsApi = createApi({
       query: (slug) => `item/${slug}/`,
       providesTags: ["UserItems"],
     }),
+    getFavouriteItems: builder.query({
+      query: () => `favourites/${JSON.parse(localStorage.getItem("id"))}/`,
+      providesTags: ["UserItems"],
+    }),
     getCategory: builder.query({
       query: (id) => `categories/${id}/`,
     }),
@@ -65,11 +69,23 @@ export const itemsApi = createApi({
         
       },
     }),
+    favouriteItem: builder.mutation({
+      query(body) {
+        return {
+          url: `favourites/`,
+          method: "POST",
+          body
+        };
+        
+      },
+    }),
     
   }),
 });
 
 export const {
+  useFavouriteItemMutation,
+  useGetFavouriteItemsQuery,
   useCreateDisputeMutation,
   useDeleteItemMutation,
   useEditItemMutation,

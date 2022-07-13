@@ -75,8 +75,9 @@ div.profile{
          .tab-content{
              .tab-pane{
                  img{
-                     height: 140px;
-                     width: 140px;
+                     height: 200px;
+                     width: 200px;
+                     object-fit: contain;
                  }
                  h5{
                     font-size: 0.87rem !important;

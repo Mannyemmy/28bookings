@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import "./styles/index.scss";
 import "./styles/tailwind.css";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import Footer from "./components/Footer";
 import HowItWorked from "./pages/how-it-works/HowItWorked";
 import ListAnItem from "./pages/list-an-item/ListAnItem";
@@ -48,7 +50,7 @@ const App = () => {
         <Route path={"/chat"} children={<Chat />} />
         <Route path={"/list-an-item"} component={ListAnItem} />
         <Route path={"/my-orders"} component={Orders} />
-        <Route path={"/favorites"} component={Favorite} />
+        <Route path={"/favourites"} component={Favorite} />
         <Route path={"/rentals"} component={Rentals} />
         <Route path={"/profile"} component={Profile} />
         <Route path={"/user/:id"} children={<SingleProfile/>} />

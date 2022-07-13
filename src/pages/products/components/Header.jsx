@@ -25,9 +25,9 @@ const Header = ({title}) => {
                                  />                    
                      </h5>                   
                 </div>
-                <div className="image-wrapper">
+                {/* <div className="image-wrapper">
                     <img src={  require('../../../assets/bubbles.png') } alt="header" />
-                </div>
+                </div> */}
             </div>               
         </header>
   )

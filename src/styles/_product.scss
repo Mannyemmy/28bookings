@@ -180,12 +180,15 @@ div.product-page{
           div.col-12{
              &>div{
                 width: 94%;  
+                border-radius: 20px;
                            
                 img{
-                   height: 300px;
-                   border-radius: 10px;
+                   height: 250px;
+                   width: 100%;
+                   
                    object-position: center;
-                   object-fit: contain
+                   object-fit: contain;
+
                 }
                 p{
                    span{

@@ -18,7 +18,7 @@ export const adminApi = createApi({
         })
       }),
     getSettings: builder.query({
-      query : ()=> `settings/`,
+      query : ()=> `settings`,
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;

@@ -65,6 +65,12 @@ const LoggedUserDropdown = () => {
             </Link>{" "}
           </li>
           <li>
+            <Link className="dropdown-item ps-2" to="/favourites">
+              {" "}
+              Favourites{" "}
+            </Link>{" "}
+          </li>
+          <li>
             <Link className="dropdown-item ps-2" to="/create-item">
               {" "}
               Create Item{" "}

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import Category from "./components/Category";
 import { useHistory, useParams } from "react-router-dom";
 import { useGetSearchResultsQuery } from "../../services/itemsApi";
+import ItemCard from "../../components/ItemCard";
 
 const SearchProduct = () => {
   const history = useHistory();
@@ -37,7 +38,7 @@ const SearchProduct = () => {
         <Loader />
       ) : (
         <div className="search-page">
-          <div className=" mt-2 mt-sm-1 px-2 pb-2 border-bottom">
+          {/* <div className=" mt-2 mt-sm-1 px-2 pb-2 border-bottom">
             <button
               className="btn py-1 px-3 me-2 location-btn"
               data-bs-toggle="modal"
@@ -52,7 +53,7 @@ const SearchProduct = () => {
             >
               Category
             </button>
-          </div>
+          </div> */}
           {/* <Location  id = 'locationModal' /> */}
           <Category id="categoryModal" />
           <div className="search-result row w-100 p-0 m-0 mx-auto mt-md-2 mb-4">
@@ -67,32 +68,7 @@ const SearchProduct = () => {
             ) : (
               items.map((item) => {
                 return (
-                  <div
-                    key={item.id}
-                    className="col-12 col-md-3 p-0 m-0 mt-3 mt-md-2"
-                  >
-                    <div
-                      onClick={() => handleNavigateToRentalPage(item.slug)}
-                      className="d-block mx-auto"
-                    >
-                      <img
-                        src={`${item.imagesCdnUrl}nth/${0}/`}
-                        alt={item.title}
-                        className="w-100"
-                      />
-                      <p className="d-flex justify-content-between px-1 mt-1 mb-1">
-                        <span> {item.created_by.first_name} </span>
-                        <span>
-                          {" "}
-                          {/* <i className="fas fa-star"></i> {item.stars} */}
-                        </span>
-                      </p>
-                      <h6 className="mb-0"> {item.title} </h6>
-                      <p className="price p-0 pt-1 mb-1">
-                        ₦{item.daily_price}/day
-                      </p>
-                    </div>
-                  </div>
+                  <ItemCard key={item.id} item={item}/>
                 );
               })
             )}

@@ -12,7 +12,10 @@ import MoreItems from "./components/MoreItems";
 import ExploreOtherOptions from "./components/ExploreOtherOptions";
 import WhyRentWithUs from "./components/WhyRentWithUs";
 import { useParams } from "react-router-dom";
-import { useGetItemBySlugQuery } from "../../services/itemsApi";
+import {
+  useGetItemBySlugQuery,
+  useFavouriteItemMutation,
+} from "../../services/itemsApi";
 import { useGetUserQuery, usersApi } from "../../services/usersApi";
 import RentalLoader from "./components/RentalLoader";
 import { createRental } from "../../services/rentalServices";
@@ -94,6 +97,29 @@ const Rental = () => {
     }
   };
 
+  // const [result, setResult] = useState([]);
+
+  // useEffect(() => {
+  //   isSuccess &&
+  //     setResult(
+  //       // data?.item?.favourites.find(
+  //       //   (el) => el.user_id == JSON.parse(localStorage.getItem("id"))
+  //       // )
+  //     );
+  // }, [isSuccess]);
+
+  // const [liked, setLiked] = useState(true);
+
+  // const [favourite] = useFavouriteItemMutation();
+
+  // const likeItem = () => {
+  //   setLiked(!liked);
+  //   favourite({
+  //     user_id: JSON.parse(localStorage.getItem("id")),
+  //     item_id: data?.item.id,
+  //   });
+  // };
+
   return (
     <>
       <Navbar />
@@ -102,7 +128,24 @@ const Rental = () => {
       ) : (
         <div className="rental-page">
           <div className="row w-100 p-0 m-0 mx-auto mt-2 mt-md-3">
-            <div className="col-12 col-md-7 px-0 px-md-2 carousel-container">
+            <div className="col-12 col-md-7 px-0 px-md-2 carousel-container ">
+              {/* <div
+                className="tw-absolute tw-right-6 tw-top-2 md:tw-right-2  tw-z-20 tw-cursor-pointer"
+                onClick={likeItem}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`tw-h-4 tw-w-4 ${liked ? "tw-text-pink-700" : ""}`}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div> */}
               <Carousel
                 dynamicHeight={false}
                 showArrows={false}
