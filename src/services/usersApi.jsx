@@ -18,14 +18,14 @@ export const usersApi = createApi({
   tagTypes: ['User'],
   endpoints: (builder) => ({
     getUser: builder.query({
-      query: (id) => `user/${id}`,
+      query: (id) => `user/${id}/`,
       providesTags: ['User']
     }),
     updateProfile: builder.mutation({
       query(data) {
         const {id, body} = data;
         return {
-          url: `profile/${id}`,
+          url: `profile/${id}/`,
           method: 'POST',
           body : body
         }
@@ -35,7 +35,7 @@ export const usersApi = createApi({
     requestWithdraw : builder.mutation({
       query(body) {
         return {
-          url: `withdraw`,
+          url: `withdraw/`,
           method: 'POST',
           body 
         }

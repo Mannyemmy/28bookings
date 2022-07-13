@@ -8,17 +8,17 @@ export const adminApi = createApi({
   }),
   endpoints: (builder) => ({
     getContacts: builder.query({
-      query: () => `contacts`,
+      query: () => `contacts/`,
     }),
     createContact: builder.mutation({
         query: ({ ...patch }) => ({
-          url: `contacts`,
+          url: `contacts/`,
           method: "POST",
           body: patch,
         })
       }),
     getSettings: builder.query({
-      query : ()=> `settings`,
+      query : ()=> `settings/`,
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;

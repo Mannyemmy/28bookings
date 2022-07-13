@@ -19,17 +19,17 @@ export const itemsApi = createApi({
   }),
   endpoints: (builder) => ({
     getItemBySlug: builder.query({
-      query: (slug) => `item/${slug}`,
+      query: (slug) => `item/${slug}/`,
       providesTags: ["UserItems"],
     }),
     getCategory: builder.query({
-      query: (id) => `categories/${id}`,
+      query: (id) => `categories/${id}/`,
     }),
     getRandomItem: builder.query({
-      query: () => `random`,
+      query: () => `random/`,
     }),
     getSearchResults: builder.query({
-      query: (query) => `search/${query}`,
+      query: (query) => `search/${query}/`,
     }),
     getUserItems: builder.query({
       query: (id) => `users/${JSON.parse(localStorage.getItem("id"))}/items/`,
@@ -39,7 +39,7 @@ export const itemsApi = createApi({
       query(data) {
         const { id, body } = data;
         return {
-          url: `update/items/${id}`,
+          url: `update/items/${id}/`,
           method: "PATCH",
           body: body,
         };
@@ -49,7 +49,7 @@ export const itemsApi = createApi({
     deleteItem: builder.mutation({
       query(id) {
         return {
-          url: `items/${id}`,
+          url: `items/${id}/`,
           method: "DELETE",
         };
       },
@@ -58,7 +58,7 @@ export const itemsApi = createApi({
     createDispute: builder.mutation({
       query(body) {
         return {
-          url: `disputes`,
+          url: `disputes/`,
           method: "POST",
           body
         };

@@ -23,7 +23,7 @@ export const messagesApi = createApi({
       providesTags: ["Messages"],
     }),
     getRentalDates: builder.query({
-      query: (id) => `rentals/pending/${id}`,
+      query: (id) => `rentals/pending/${id}/`,
     }),
     getRentalInboxMessages: builder.query({
       query: () => `rentals/`,
@@ -33,7 +33,7 @@ export const messagesApi = createApi({
     paymentSuccess: builder.mutation({
       query(data) {
         return {
-          url: `payment_success`,
+          url: `payment_success/`,
           method: "PATCH",
           body: data,
         };
@@ -42,7 +42,7 @@ export const messagesApi = createApi({
     }),
     updateIsRead: builder.mutation({
       query: ({ id }) => ({
-        url: `read_message/${id}`,
+        url: `read_message/${id}/`,
         method: "PATCH",
         body: {
           is_read: true,
@@ -51,7 +51,7 @@ export const messagesApi = createApi({
     }),
     dropOffConfirm: builder.mutation({
       query: ({ ...patch }) => ({
-        url: `dropoff_success`,
+        url: `dropoff_success/`,
         method: "PATCH",
         body: patch,
       }),
@@ -59,7 +59,7 @@ export const messagesApi = createApi({
     }),
     rejectBooking: builder.mutation({
       query: ({ ...patch }) => ({
-        url: `reject_booking`,
+        url: `reject_booking/`,
         method: "PATCH",
         body: patch,
       }),
@@ -67,7 +67,7 @@ export const messagesApi = createApi({
     }),
     acceptBooking: builder.mutation({
       query: ({ ...patch }) => ({
-        url: `accept_booking`,
+        url: `accept_booking/`,
         method: "PATCH",
         body: patch,
       }),

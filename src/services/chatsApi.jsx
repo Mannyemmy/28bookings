@@ -19,7 +19,7 @@ export const chatsApi = createApi({
   endpoints: (builder) => ({
     getUserChats: builder.mutation({
       query: ({ ...patch }) => ({
-        url: `chat_users`,
+        url: `chat_users/`,
         method: "POST",
         body: patch,
       }),
@@ -27,14 +27,14 @@ export const chatsApi = createApi({
     }),
     getChatMessages: builder.mutation({
       query: ({ ...patch }) => ({
-        url: `chat_messages`,
+        url: `chat_messages/`,
         method: "POST",
         body: patch,
       }),
     }),
     addChatMessage: builder.mutation({
       query: ({ ...patch }) => ({
-        url: `chat`,
+        url: `chat/`,
         method: "POST",
         body: patch,
       }),

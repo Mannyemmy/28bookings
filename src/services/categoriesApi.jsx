@@ -7,22 +7,22 @@ export const categoriesApi = createApi({
   }),
   endpoints: (builder) => ({
     getCategories: builder.query({
-      query: (id) => `subcategories/${id}`,
+      query: (id) => `subcategories/${id}/`,
     }),
     getCategory: builder.query({
-      query: (id) => `categories/${id}`,
+      query: (id) => `categories/${id}/`,
     }),
     getAllCategories: builder.query({
-      query: () => `categories/all`,
+      query: () => `categories/all/`,
     }),
     getItemsByCategory: builder.query({
       query: (id) => `categories/${id}/items/`,
     }),
     getCategoryBySlug: builder.query({
-      query: (slug) => `category/${slug}`,
+      query: (slug) => `category/${slug}/`,
     }),
     getEditCategories: builder.query({
-      query: () => `categories`
+      query: () => `categories/`
     })
   }),
 });
