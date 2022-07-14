@@ -172,7 +172,7 @@ const CreateItemForm = () => {
         <div>
           <Widget
             onChange={(info) => handleImageChange(info)}
-            multipleMax={5}
+            multipleMax={20}
             multipleMaxStrict
             multiple="true"
             imagesOnly="true"
