@@ -32,6 +32,24 @@ export const usersApi = createApi({
       },
       invalidatesTags: ['User'] 
     }),
+    forgotPassword: builder.mutation({
+      query(body) { 
+        return {
+          url: `forgot-password`,
+          method: 'POST',
+          body 
+        }
+      },
+    }),
+    changePassword: builder.mutation({
+      query(body) { 
+        return {
+          url: `change-password/`,
+          method: 'PATCH',
+          body 
+        }
+      },
+    }),
     requestWithdraw : builder.mutation({
       query(body) {
         return {
@@ -45,6 +63,6 @@ export const usersApi = createApi({
   })
 })
 
-export const {useGetUserQuery , useUpdateProfileMutation, useRequestWithdrawMutation} = usersApi;
+export const {useGetUserQuery , useUpdateProfileMutation, useRequestWithdrawMutation ,useChangePasswordMutation, useForgotPasswordMutation} = usersApi;
 
 

@@ -30,6 +30,7 @@ import Inbox from "./pages/inbox/Inbox";
 import SingleProfile from "./pages/userProfile/UserProfile";
 import MyItems from "./pages/my-items";
 import EditItem from "./pages/edit-item";
+import ResetPassword from "./pages/reset-password"
 import {useGetSettingsQuery} from "./services/AdminApi";
 
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
         <Route path={"/chat"} children={<Chat />} />
         <Route path={"/list-an-item"} component={ListAnItem} />
         <Route path={"/my-orders"} component={Orders} />
+        <Route path={"/reset-password"} component={ResetPassword} />
         <Route path={"/favourites"} component={Favorite} />
         <Route path={"/rentals"} component={Rentals} />
         <Route path={"/profile"} component={Profile} />

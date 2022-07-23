@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useUpdateProfileMutation } from "../../../services/usersApi";
+import { useUpdateProfileMutation, useChangePasswordMutation } from "../../../services/usersApi";
+import {signout } from "../../../services/authServices"
+
 import { useHistory } from "react-router-dom";
 
 const EditProfileForm = ({ user }) => {
   let history = useHistory();
+
+  const [message,  setMessage] = useState(null);
 
   const {
     register,
@@ -16,6 +20,7 @@ const EditProfileForm = ({ user }) => {
   } = useForm();
 
   const [updateProfile, { isLoading, isSuccess }] = useUpdateProfileMutation();
+  const [changePassword, { isLoading : changingPassword, isSuccess : changedPassword, error }] = useChangePasswordMutation();
 
   const [editForm, setEditForm] = useState({
     profileImage: "",
@@ -59,9 +64,22 @@ const EditProfileForm = ({ user }) => {
     await updateProfile({ id: user.profile[0].id, body: formData });
   };
 
+  const onPasswordChange = async (data) => {
+    var body = {
+      old_password: data.old_password,
+      new_password: data.new_password,
+      confirm_password: data.confirm_password
+    } 
+    await changePassword(body)
+  }
+
   useEffect(() => {
     isSuccess && history.push("/profile");
   }, [isSuccess]);
+
+  useEffect(() => {
+    changedPassword && signout();
+  } ,[changedPassword])
 
   return (
     <>
@@ -160,9 +178,7 @@ const EditProfileForm = ({ user }) => {
         <div className="d-flex update-data justify-content-end mb-4 border-top pt-2">
           <div>
             <button className="btn btn-success px-3 me-2" type="submit">
-             {
-               isLoading ? "Loading..." : "Save"
-             }
+              {isLoading ? "Loading..." : "Save"}
             </button>
             <Link to="/profile" className="btn ">
               {" "}
@@ -171,6 +187,48 @@ const EditProfileForm = ({ user }) => {
           </div>
         </div>
       </form>
+      <div className="row p-2 g-0">
+        <div className="col-12 col-md-6 offset-md-3 ">
+          <h1 className="text-center">Change Password</h1>
+          <form   onSubmit={handleSubmit(onPasswordChange)}>
+            <div class="form-group">
+              <label for="old_password" >Old Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="old_password"
+                required
+                placeholder="current password"
+                {...register("old_password")}
+              />
+            </div>
+            <div class="form-group">
+              <label for="new_password">New Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="new_password"
+                required
+                placeholder="enter new password"
+                {...register("new_password")}
+              />
+            </div>
+            <div class="form-group">
+              <label for="confirm_password">Confirm password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirm_password"
+                required
+                placeholder="confirm new password"
+                {...register("confirm_password")}
+              />
+            </div>
+            <button type="submit" class="btn btn-primary w-100 my-2">{changingPassword ? "Loading..." : "Submit"} </button>
+          </form>
+          {error && (<p class="text-danger">{error.data.detail}</p> )}
+        </div>
+      </div>
     </>
   );
 };

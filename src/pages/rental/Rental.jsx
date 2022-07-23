@@ -27,8 +27,10 @@ import TextLoader from "../../components/TextLoader";
 
 const Rental = () => {
   const history = useHistory();
+  const [showLogin, setShowLogin] =useState(false);
   let { slug } = useParams();
   const stateUserId = useSelector((state) => state.auth.id);
+  const loggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [user_id, setUserId] = useState(
     localStorage.getItem("id") || stateUserId
   );
@@ -97,6 +99,8 @@ const Rental = () => {
     }
   };
 
+ 
+
   // const [result, setResult] = useState([]);
 
   // useEffect(() => {
@@ -122,7 +126,7 @@ const Rental = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar showLogin={showLogin}/>
       {isFetching ? (
         <TextLoader />
       ) : (
@@ -189,28 +193,39 @@ const Rental = () => {
                 })}
               </div>
               <>
-                {user_id == data.user.id ? (
-                  <Link to={`/edit-item/${data.item.slug}`}>
-                    <button className="btn btn-success mt-4 d-block mx-auto mb-3">
-                      Edit Item
-                    </button>
-                  </Link>
-                ) : (
+                {loggedIn ? (
                   <>
-                    {data.item.is_available ? (
-                      <button
-                        data-bs-toggle="modal"
-                        data-bs-target="#dateModal"
-                        className="btn btn-success mt-4 d-block mx-auto mb-3"
-                      >
-                        Check price and avaibility
-                      </button>
+                    {user_id == data.user.id ? (
+                      <Link to={`/edit-item/${data.item.slug}`}>
+                        <button className="btn btn-success mt-4 d-block mx-auto mb-3">
+                          Edit Item
+                        </button>
+                      </Link>
                     ) : (
-                      <button className="btn btn-success mt-4 d-block mx-auto mb-3">
-                        Item is currently unavailable
-                      </button>
+                      <>
+                        {data.item.is_available ? (
+                          <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#dateModal"
+                            className="btn btn-success mt-4 d-block mx-auto mb-3"
+                          >
+                            Check price and avaibility
+                          </button>
+                        ) : (
+                          <button className="btn btn-success mt-4 d-block mx-auto mb-3">
+                            Item is currently unavailable
+                          </button>
+                        )}
+                      </>
                     )}
                   </>
+                ) : (
+                  <button
+                    className="btn btn-success mt-4 d-block mx-auto mb-3"
+                    onClick={() => document.getElementById("login-btn").click()}
+                  >
+                    Login to check price and avaibility
+                  </button>
                 )}
               </>
             </div>

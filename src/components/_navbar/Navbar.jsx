@@ -6,7 +6,7 @@ import SignIn from "./components/SignIn";
 import { useSelector } from "react-redux";
 import LoggedUserDropdown from "./components/LoggedUserDropdown";
 
-const Navbar = () => {
+const Navbar = ({showLogin}) => {
   const inputSearchRef = useRef(null);
   const [showSingup, setShowSignUp] = React.useState(true);
   const isAuth = useSelector((state) => state.auth.isLoggedIn);
@@ -81,6 +81,8 @@ const Navbar = () => {
                     className="dropdown-item px-1 login-signup-btn"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#signup"
+                    id="login-btn"
+                   
                   >
                     Login or Sign up
                   </span>
@@ -105,7 +107,7 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
-        <div className="offcanvas offcanvas-end" id="signup">
+        <div className={`offcanvas offcanvas-end  `} id="signup">
           {showSingup ? (
             <Signup setShowSignUp={setShowSignUp} />
           ) : (

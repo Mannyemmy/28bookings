@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 // import { updateLoginStatus } from "../../../features/login-signup/loginSlice";
 import {login} from "../../../services/authServices";
 import { userLoginFailure, userLoginSuccess } from "../../../features/slices/authSlice";
+import {Link} from "react-router-dom";
 
 const Signup = ({ setShowSignUp }) => {
   const dispatch = useDispatch();
@@ -160,6 +161,7 @@ const Signup = ({ setShowSignUp }) => {
             {error}
           </p>
         </form>
+        <Link to="/reset-password"><span className="text-danger">Forgot Password?</span></Link>
       </div>
     </div>
   );

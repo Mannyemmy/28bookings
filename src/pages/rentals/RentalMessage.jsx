@@ -13,6 +13,7 @@ import {
 } from "../../services/messagesApi";
 import { useGetUserQuery } from "../../services/usersApi";
 import { useCreateDisputeMutation } from "../../services/itemsApi";
+import {useGetSettingsQuery} from "../../services/AdminApi"
 
 // Random component
 const Completionist = () => (
@@ -82,6 +83,10 @@ const RentalMessage = () => {
     refetchOnMountOrArgChange: true,
   });
 
+  const {data : settings, isLoading : gettingSettings, isSuccess : gotSettings} = useGetSettingsQuery({
+    refetchOnMountOrArgChange: true, refetchOnFocus : true});
+
+
   const [
     paymentSuccess, // This is the mutation trigger
     { isLoading: isPaymentUpdating }, // This is the destructured mutation result
@@ -91,16 +96,17 @@ const RentalMessage = () => {
     reference: new Date().getTime().toString(),
     email: lendee?.email,
     amount: message.cost * 100,
-    publicKey: "pk_test_9da36d88c1d36b3beaab17754e6a92d2ad64ccaf",
+    publicKey: "",
     channels: ["card", "ussd", "qr", "mobile_money", "bank_transfer"],
   });
 
   useEffect(() => {
-    setConfig({
+    gotSettings && setConfig({
       ...config,
       email: lendee?.email,
+      publicKey : settings.paystack_api_key
     });
-  }, [isSuccess]);
+  }, [isSuccess, gotSettings]);
 
   const initializePayment = usePaystackPayment(config);
 
