@@ -3,7 +3,7 @@ import axios from "axios";
 
 const instance = axios.create({
     // .. where we make our configurations
-        baseURL: `https://api.28bookings.com/api/`,
+        baseURL: process.env.REACT_APP_BASE_URL,
     });
 
 
