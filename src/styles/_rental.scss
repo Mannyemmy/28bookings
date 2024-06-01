@@ -287,7 +287,7 @@ div.rental-page{
       }
     }
     div.more-items{
-        @extend div.other-items ;
+        @extend div, .other-items ;
     }
     div.explore-other-options{
         h5{
